@@ -5,10 +5,16 @@
 }
 
 body {
-    background-color: #e9e2d5;
+    background: #e9e2d5;
     color: #354438;
     font-family: Georgia, serif;
 }
+
+.hidden {
+    display: none !important;
+}
+
+/* PORTADA */
 
 .cover {
     min-height: 100vh;
@@ -17,14 +23,12 @@ body {
     justify-content: center;
     padding: 30px;
     position: relative;
-    overflow: hidden;
-    background:
-        radial-gradient(
-            ellipse at center,
-            #f5f0e7 0%,
-            #e9e2d5 75%,
-            #d9cebd 100%
-        );
+    background: radial-gradient(
+        ellipse at center,
+        #f5f0e7 0%,
+        #e9e2d5 75%,
+        #d9cebd 100%
+    );
 }
 
 .cover::before {
@@ -35,18 +39,133 @@ body {
     pointer-events: none;
 }
 
-.cover-content {
-    text-align: center;
-    max-width: 700px;
-    padding: 30px;
+.title-button {
     position: relative;
     z-index: 1;
-}
-
-h1 {
+    border: none;
+    background: transparent;
+    color: #354438;
+    font-family: Georgia, serif;
     font-size: clamp(42px, 8vw, 76px);
-    font-weight: normal;
     line-height: 1.15;
     letter-spacing: -2px;
+    cursor: pointer;
+    text-align: center;
+    max-width: 750px;
+}
+
+/* CALENDARIO */
+
+.calendar {
+    min-height: 100vh;
+    padding: 70px 25px;
+    text-align: center;
+}
+
+.calendar-header {
+    max-width: 600px;
+    margin: 0 auto 45px;
+}
+
+.eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+    color: #8a7962;
+}
+
+.calendar-header h2 {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+.calendar-header > p:last-child {
+    color: #817866;
+    font-size: 15px;
+}
+
+.days-grid {
+    max-width: 850px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.day {
+    min-height: 115px;
+    border: 1px solid #b9ad98;
+    background: #f2ede4;
     color: #354438;
+    font-family: Georgia, serif;
+    font-size: 27px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.day:hover:not(:disabled) {
+    background: #354438;
+    color: #f2ede4;
+}
+
+.day:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+@media (max-width: 550px) {
+    .days-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .day {
+        min-height: 90px;
+    }
+}
+
+/* VENTANA DE SORPRESAS */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(35, 43, 35, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10;
+}
+
+.modal-content {
+    position: relative;
+    background: #f5f0e7;
+    padding: 55px 35px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    border: 1px solid #b9ad98;
+}
+
+.modal-content h2 {
+    font-size: 32px;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+.modal-content p:last-child {
+    line-height: 1.7;
+    color: #655f52;
+}
+
+.close-button {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #354438;
+    cursor: pointer;
 }

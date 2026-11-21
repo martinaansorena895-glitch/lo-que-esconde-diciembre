@@ -24,10 +24,14 @@ const surprises = [
 
 // Abrir el calendario
 enterButton.addEventListener("click", () => {
-    cover.classList.add("hidden");
-    calendar.classList.remove("hidden");
-});
+    cover.classList.add("leaving");
 
+    setTimeout(() => {
+        cover.classList.add("hidden");
+        cover.classList.remove("leaving");
+        calendar.classList.remove("hidden");
+    }, 800);
+});
 // Crear los 24 días
 for (let day = 1; day <= 24; day++) {
     const button = document.createElement("button");

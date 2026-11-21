@@ -208,3 +208,146 @@ body {
     opacity: 0;
     pointer-events: none;
 }
+
+/* DECORACION DE PORTADA */
+
+.cover {
+    overflow: hidden;
+}
+
+.cover::before {
+    inset: 24px;
+    border: 1px solid #b5a58d;
+}
+
+.cover::after {
+    content: "";
+    position: absolute;
+    inset: 31px;
+    border: 1px solid rgba(181, 165, 141, 0.35);
+    pointer-events: none;
+}
+
+.cover-content {
+    animation: appear 1.3s ease both;
+    gap: 0;
+}
+
+.cover-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #927e65;
+    margin-bottom: 35px;
+}
+
+.ornament {
+    color: #a58a66;
+    font-size: 15px;
+    letter-spacing: 5px;
+    margin-bottom: 25px;
+}
+
+.cover-content h1 {
+    font-size: clamp(45px, 9vw, 82px);
+    font-weight: normal;
+    line-height: 1.12;
+    max-width: 700px;
+    letter-spacing: -2px;
+}
+
+.cover-subtitle {
+    font-size: 14px;
+    font-style: italic;
+    color: #8c806d;
+    margin-top: 22px;
+}
+
+.enter-button {
+    margin-top: 48px;
+    padding: 15px 28px;
+    border: 1px solid #9d8d74;
+    background: transparent;
+    color: #354438;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.enter-button span {
+    margin-left: 12px;
+}
+
+.enter-button:hover {
+    background: #354438;
+    color: #f5f0e7;
+    transform: translateY(-4px);
+}
+
+.cover-footer {
+    margin-top: 55px;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: #9c8c76;
+}
+
+.cover-decoration {
+    position: absolute;
+    color: #9b8060;
+    animation: float 5s ease-in-out infinite;
+}
+
+.decoration-top {
+    top: 12%;
+    font-size: 35px;
+}
+
+.decoration-left {
+    left: 12%;
+    top: 40%;
+    font-size: 28px;
+}
+
+.decoration-right {
+    right: 12%;
+    bottom: 30%;
+    font-size: 28px;
+    animation-delay: 1s;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-9px);
+    }
+}
+
+@media (max-width: 550px) {
+    .cover-label {
+        letter-spacing: 3px;
+    }
+
+    .decoration-left {
+        left: 8%;
+    }
+
+    .decoration-right {
+        right: 8%;
+    }
+}

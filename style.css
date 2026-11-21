@@ -1,0 +1,24 @@
+/* GENERAL */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f3eee3;
+    color: #263c32;
+    font-family: Georgia, serif;
+    min-height: 100vh;
+}
+
+/* MAIN TITLE */
+
+h1 {
+    font-size: 42px;
+    font-weight: normal;
+    text-align: center;
+    letter-spacing: 2px;
+    padding: 80px 20px;
+}

@@ -1,21 +1,46 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Lo que esconde diciembre</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <main class="cover">
-        <div class="cover-content">
-            <h1>Lo que esconde diciembre</h1>
-        </div>
+    <!-- PORTADA -->
+    <main id="cover" class="cover">
+        <button id="enterButton" class="title-button">
+            Lo que esconde diciembre
+        </button>
     </main>
+
+    <!-- CALENDARIO -->
+    <section id="calendar" class="calendar hidden">
+
+        <header class="calendar-header">
+            <p class="eyebrow">DICIEMBRE · 2026</p>
+            <h2>24 días, 24 sorpresas.</h2>
+            <p>Hay cosas que merecen ser descubiertas de a poco.</p>
+        </header>
+
+        <div id="daysGrid" class="days-grid"></div>
+
+    </section>
+
+    <!-- VENTANA DE SORPRESAS -->
+    <div id="surpriseModal" class="modal hidden">
+        <div class="modal-content">
+            <button id="closeModal" class="close-button">×</button>
+            <p id="surpriseNumber" class="eyebrow"></p>
+            <h2 id="surpriseTitle"></h2>
+            <p id="surpriseText"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 
 </body>
 </html>

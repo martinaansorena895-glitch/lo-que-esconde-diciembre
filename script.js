@@ -1,3 +1,4 @@
+
 const enterButton = document.getElementById("enterButton");
 const cover = document.getElementById("cover");
 const calendar = document.getElementById("calendar");
@@ -9,15 +10,18 @@ const closeModal = document.getElementById("closeModal");
 const surpriseNumber = document.getElementById("surpriseNumber");
 const surpriseTitle = document.getElementById("surpriseTitle");
 const surpriseText = document.getElementById("surpriseText");
+const surpriseContent = document.getElementById("surpriseContent");
 
 // Sorpresas de diciembre
 const surprises = [
     {
         title: "Un comienzo",
+        type: "letter",
         text: "Bienvenido a diciembre. Durante los próximos 24 días vas a encontrar pequeñas sorpresas preparadas especialmente para vos."
     },
     ...Array.from({ length: 23 }, (_, index) => ({
         title: `Sorpresa ${index + 2}`,
+        type: "text",
         text: "Esta sorpresa todavía está esperando a ser descubierta."
     }))
 ];
@@ -32,6 +36,38 @@ enterButton.addEventListener("click", () => {
         calendar.classList.remove("hidden");
     }, 800);
 });
+
+// Mostrar el regalo correspondiente
+function showGift(surprise) {
+    surpriseContent.innerHTML = "";
+
+    if (surprise.type === "photo") {
+        const image = document.createElement("img");
+        image.src = surprise.image;
+        image.alt = "Un recuerdo especial";
+        image.classList.add("gift-photo");
+        surpriseContent.appendChild(image);
+    }
+
+    if (surprise.type === "song") {
+        const link = document.createElement("a");
+        link.href = surprise.link;
+        link.textContent = "Escuchar la canción";
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.classList.add("gift-link");
+        surpriseContent.appendChild(link);
+    }
+
+    if (surprise.type === "video") {
+        const video = document.createElement("video");
+        video.src = surprise.video;
+        video.controls = true;
+        video.classList.add("gift-video");
+        surpriseContent.appendChild(video);
+    }
+}
+
 // Crear los 24 días
 for (let day = 1; day <= 24; day++) {
     const button = document.createElement("button");
@@ -59,6 +95,8 @@ for (let day = 1; day <= 24; day++) {
         surpriseNumber.textContent = `DÍA ${day}`;
         surpriseTitle.textContent = surprise.title;
         surpriseText.textContent = surprise.text;
+
+        showGift(surprise);
 
         surpriseModal.classList.remove("hidden");
     });

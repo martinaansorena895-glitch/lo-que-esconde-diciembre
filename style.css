@@ -662,3 +662,36 @@ body {
         height: 30px;
     }
 }
+
+
+/* EQUILIBRIO DE COLORES: 4 DE CADA UNO */
+
+.day:nth-child(6n + 1) {
+    background: #354438;
+    color: #f5f0e7;
+}
+
+.day:nth-child(6n + 2) {
+    background: #eee5d7;
+    color: #6b3439;
+}
+
+.day:nth-child(6n + 3) {
+    background: #d8c8ad;
+    color: #354438;
+}
+
+.day:nth-child(6n + 4) {
+    background: #6b3439;
+    color: #f5f0e7;
+}
+
+.day:nth-child(6n + 5) {
+    background: #f5f0e7;
+    color: #354438;
+}
+
+.day:nth-child(6n) {
+    background: #b5a58d;
+    color: #354438;
+}

@@ -1,3 +1,6 @@
+
+/* BASE */
+
 * {
     margin: 0;
     padding: 0;
@@ -23,201 +26,22 @@ body {
     justify-content: center;
     padding: 30px;
     position: relative;
+    overflow: hidden;
     background: radial-gradient(
         ellipse at center,
         #f5f0e7 0%,
         #e9e2d5 75%,
         #d9cebd 100%
     );
+    transition: opacity 0.8s ease;
 }
 
 .cover::before {
     content: "";
     position: absolute;
-    inset: 18px;
-    border: 1px solid #a99b83;
-    pointer-events: none;
-}
-
-.title-button {
-    position: relative;
-    z-index: 1;
-    border: none;
-    background: transparent;
-    color: #354438;
-    font-family: Georgia, serif;
-    font-size: clamp(42px, 8vw, 76px);
-    line-height: 1.15;
-    letter-spacing: -2px;
-    cursor: pointer;
-    text-align: center;
-    max-width: 750px;
-}
-
-/* CALENDARIO */
-
-.calendar {
-    min-height: 100vh;
-    padding: 70px 25px;
-    text-align: center;
-}
-
-.calendar-header {
-    max-width: 600px;
-    margin: 0 auto 45px;
-}
-
-.eyebrow {
-    font-size: 11px;
-    letter-spacing: 3px;
-    margin-bottom: 18px;
-    color: #8a7962;
-}
-
-.calendar-header h2 {
-    font-size: clamp(30px, 5vw, 46px);
-    font-weight: normal;
-    margin-bottom: 15px;
-}
-
-.calendar-header > p:last-child {
-    color: #817866;
-    font-size: 15px;
-}
-
-.days-grid {
-    max-width: 850px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-}
-
-.day {
-    min-height: 115px;
-    border: 1px solid #b9ad98;
-    background: #f2ede4;
-    color: #354438;
-    font-family: Georgia, serif;
-    font-size: 27px;
-    cursor: pointer;
-    transition: 0.25s;
-}
-
-.day:hover:not(:disabled) {
-    background: #354438;
-    color: #f2ede4;
-}
-
-.day:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-}
-
-@media (max-width: 550px) {
-    .days-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-    }
-
-    .day {
-        min-height: 90px;
-    }
-}
-
-/* VENTANA DE SORPRESAS */
-
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(35, 43, 35, 0.65);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 10;
-}
-
-.modal-content {
-    position: relative;
-    background: #f5f0e7;
-    padding: 55px 35px;
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-    border: 1px solid #b9ad98;
-}
-
-.modal-content h2 {
-    font-size: 32px;
-    font-weight: normal;
-    margin-bottom: 20px;
-}
-
-.modal-content p:last-child {
-    line-height: 1.7;
-    color: #655f52;
-}
-
-.close-button {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    background: none;
-    border: none;
-    font-size: 28px;
-    color: #354438;
-    cursor: pointer;
-}
-.cover-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 35px;
-    transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.enter-button {
-    background: transparent;
-    border: 1px solid #8c826e;
-    color: #354438;
-    padding: 14px 32px;
-    font-family: Georgia, serif;
-    font-size: 14px;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.enter-button:hover {
-    background: #354438;
-    color: #f5f0e7;
-    transform: translateY(-3px);
-}
-
-.cover.leaving .cover-content {
-    opacity: 0;
-    transform: translateY(-15px);
-}
-
-.cover {
-    transition: opacity 0.8s ease;
-}
-
-.cover.leaving {
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* DECORACION DE PORTADA */
-
-.cover {
-    overflow: hidden;
-}
-
-.cover::before {
     inset: 24px;
     border: 1px solid #b5a58d;
+    pointer-events: none;
 }
 
 .cover::after {
@@ -229,8 +53,14 @@ body {
 }
 
 .cover-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     animation: appear 1.3s ease both;
-    gap: 0;
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .cover-label {
@@ -316,64 +146,58 @@ body {
     animation-delay: 1s;
 }
 
-@keyframes appear {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.cover.leaving .cover-content {
+    opacity: 0;
+    transform: translateY(-15px);
 }
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }´
-
-    50% {
-        transform: translateY(-9px);
-    }
+.cover.leaving {
+    opacity: 0;
+    pointer-events: none;
 }
 
-@media (max-width: 550px) {
-    .cover-label {
-        letter-spacing: 3px;
-    }
-
-    .decoration-left {
-        left: 8%;
-    }
-
-    .decoration-right {
-        right: 8%;
-    }
-
-
-/* NUEVO DISEÑO DEL CALENDARIO */
+/* ENCABEZADO DEL CALENDARIO */
 
 .calendar {
+    min-height: 100vh;
+    padding: 65px 22px;
+    text-align: center;
     background: radial-gradient(
         ellipse at top,
         #f4eee3 0%,
         #e9e1d4 75%
     );
-    padding: 65px 22px;
 }
 
 .calendar-header {
-    margin-bottom: 50px;
+    max-width: 600px;
+    margin: 0 auto 50px;
+}
+
+.eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+    color: #8a7962;
 }
 
 .calendar-header h2 {
-    color: #354438;
     font-size: clamp(32px, 6vw, 48px);
+    font-weight: normal;
+    color: #354438;
+    margin-bottom: 15px;
 }
+
+.calendar-header > p:last-child {
+    color: #817866;
+    font-size: 15px;
+}
+
+/* COLLAGE DE LOS 24 DÍAS */
 
 .days-grid {
     max-width: 850px;
+    margin: auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 115px;
@@ -383,6 +207,7 @@ body {
 
 .day {
     position: relative;
+    min-width: 0;
     min-height: 0;
     border: 1px solid #b9ad98;
     background: #f5f0e7;
@@ -392,16 +217,12 @@ body {
     text-align: left;
     padding: 15px;
     overflow: hidden;
+    cursor: pointer;
     box-shadow: 2px 3px 7px rgba(53, 68, 56, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.day:hover:not(:disabled) {
-    transform: translateY(-4px);
-    box-shadow: 4px 7px 12px rgba(53, 68, 56, 0.16);
-    background: #f5f0e7;
-    color: #354438;
-}
+/* FORMAS Y TAMAÑOS */
 
 .day:nth-child(1),
 .day:nth-child(8),
@@ -414,6 +235,8 @@ body {
 .day:nth-child(13) {
     grid-row: span 2;
 }
+
+/* PALETA DE COLORES */
 
 .day:nth-child(3n) {
     background: #354438;
@@ -435,6 +258,8 @@ body {
     color: #6b3439;
 }
 
+/* DETALLES */
+
 .day::after {
     content: "✦";
     position: absolute;
@@ -444,13 +269,99 @@ body {
     opacity: 0.55;
 }
 
+.day:hover:not(:disabled) {
+    transform: translateY(-4px) rotate(-1deg);
+    box-shadow: 4px 7px 12px rgba(53, 68, 56, 0.16);
+}
+
 .day:disabled {
-    opacity: 0.55;
+    opacity: 0.65;
     cursor: not-allowed;
     box-shadow: none;
 }
 
+/* VENTANA DE SORPRESAS */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(35, 43, 35, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10;
+}
+
+.modal-content {
+    position: relative;
+    background: #f5f0e7;
+    padding: 55px 35px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    border: 1px solid #b9ad98;
+}
+
+.modal-content h2 {
+    font-size: 32px;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+.modal-content p:last-child {
+    line-height: 1.7;
+    color: #655f52;
+}
+
+.close-button {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #354438;
+    cursor: pointer;
+}
+
+/* ANIMACIONES */
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-9px);
+    }
+}
+
+/* CELULARES */
+
 @media (max-width: 550px) {
+    .cover-label {
+        letter-spacing: 3px;
+    }
+
+    .decoration-left {
+        left: 8%;
+    }
+
+    .decoration-right {
+        right: 8%;
+    }
+
     .calendar {
         padding: 50px 16px;
     }
@@ -473,3 +384,4 @@ body {
         grid-column: span 2;
     }
 }
+

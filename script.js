@@ -14,7 +14,7 @@ const surpriseContent = document.getElementById("surpriseContent");
 
 // MODO DE PRUEBA
 // Cambiar a false antes del 1 de diciembre.
-const PREVIEW_MODE = true;
+const PREVIEW_MODE = true;?v=2
 
 // REGALOS DE DICIEMBRE
 const surprises = [

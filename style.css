@@ -695,3 +695,8 @@ body {
     background: #b5a58d;
     color: #354438;
 }
+
+ /* Ocultar completamente las secciones que no corresponden */
+.hidden {
+    display: none !important;
+}

@@ -1,107 +1,38 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lo que esconde diciembre</title>
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
 
 <body>
 
     <!-- PORTADA -->
-<main id="cover" class="cover">
+    <main id="cover" class="cover">
 
-    <div class="cover-decoration decoration-top">✳</div>
-    <div class="cover-decoration decoration-left">✧</div>
-    <div class="cover-decoration decoration-right">✧</div>
+        <div class="cover-decoration decoration-top">✳</div>
+        <div class="cover-decoration decoration-left">✧</div>
+        <div class="cover-decoration decoration-right">✧</div>
 
-    <div class="cover-content">
+        <div class="cover-content">
+            <p class="cover-label">A LITTLE SOMETHING FOR YOU</p>
+            <div class="ornament">✦ ───── ✦</div>
+            <h1>Lo que esconde diciembre</h1>
+            <p class="cover-subtitle">Te amo</p>
 
-        <p class="cover-label">
-            A LITTLE SOMETHING FOR YOU
-        </p>
+            <button id="enterButton" class="enter-button">
+                Tocar para descubrir
+                <span>↗</span>
+            </button>
 
-        <div class="ornament">✦ ───── ✦</div>
+            <p class="cover-footer">DICIEMBRE · 2026</p>
+        </div>
 
-        <h1>Lo que esconde diciembre</h1>
-
-        <p class="cover-subtitle">
-          Te amo
-        </p>
-
-        <button id="enterButton" class="enter-button">
-            Tocar para descubrir
-            <span>↗</span>
-        </button>
-
-        <p class="cover-footer">
-            DICIEMBRE · 2026
-        </p>
-        
-    </div>
-
-</main>
-
-    <!-- CALENDARIO -->
-    <section id="calendar" class="calendar hidden">
-
-        <header class="calendar-header">
-            <p class="eyebrow">DICIEMBRE · 2026</p>
-            <h2>24 días, 24 sorpresas.</h2>
-            <p>Hay cosas que merecen ser descubiertas de a poco.</p>
-        </header>
-
-        <div id="daysGrid" class="days-grid"></div>
-
-    </section>
-
-   
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lo que esconde diciembre</title>
-    <link rel="stylesheet" href="style.css?v=3">
-</head>
-
-<body>
-
-    <!-- PORTADA -->
-<main id="cover" class="cover">
-
-    <div class="cover-decoration decoration-top">✳</div>
-    <div class="cover-decoration decoration-left">✧</div>
-    <div class="cover-decoration decoration-right">✧</div>
-
-    <div class="cover-content">
-
-        <p class="cover-label">
-            A LITTLE SOMETHING FOR YOU
-        </p>
-
-        <div class="ornament">✦ ───── ✦</div>
-
-        <h1>Lo que esconde diciembre</h1>
-
-        <p class="cover-subtitle">
-          Te amo
-        </p>
-
-        <button id="enterButton" class="enter-button">
-            Tocar para descubrir
-            <span>↗</span>
-        </button>
-
-        <p class="cover-footer">
-            DICIEMBRE · 2026
-        </p>
-        
-    </div>
-
-</main>
+    </main>
 
     <!-- CALENDARIO -->
     <section id="calendar" class="calendar hidden">
@@ -123,6 +54,7 @@
             <p id="surpriseNumber" class="eyebrow"></p>
             <h2 id="surpriseTitle"></h2>
             <p id="surpriseText"></p>
+            <div id="surpriseContent" class="surprise-content"></div>
         </div>
     </div>
 
@@ -130,5 +62,3 @@
 
 </body>
 </html>
-
-<div id="surpriseContent" class="surprise-content"></div>

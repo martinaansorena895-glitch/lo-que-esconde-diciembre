@@ -4,8 +4,9 @@ const cover = document.getElementById("cover");
 const calendar = document.getElementById("calendar");
 
 const daysGrid = document.getElementById("daysGrid");
-const surpriseModal = document.getElementById("surpriseModal");
-const closeModal = document.getElementById("closeModal");
+const giftScreen = document.getElementById("giftScreen");
+const backButton = document.getElementById("backButton");
+const giftPage = document.getElementById("giftPage");
 
 const surpriseNumber = document.getElementById("surpriseNumber");
 const surpriseTitle = document.getElementById("surpriseTitle");
@@ -81,8 +82,35 @@ const surprises = [
 ];
 
 // Abrir el calendario
-enterButton.addEventListener("click", () => {
-    cover.classList.add("leaving");
+enterbutton.addEventListener("click", () => {
+const surprise = surprises[day - 1];
+
+surpriseNumber.textContent = `DÍA ${day}`;
+
+if (!surprise) {
+surpriseTitle.textContent = "Todavía falta descubrirlo";
+surpriseText.textContent = "Esta sorpresa está esperando su momento.";
+surpriseContent.innerHTML = "";
+giftPage.className = "gift-page experience-page";
+} else {
+surpriseTitle.textContent = surprise.title;
+surpriseText.textContent = surprise.text;
+
+showGift(surprise);
+
+giftPage.className = surprise.type === "letter"
+? "gift-page letter-page"
+: "gift-page experience-page";
+}
+
+giftScreen.classList.remove("hidden");
+giftScreen.classList.remove("revealed");
+giftScreen.classList.add("opening");
+
+setTimeout(() => {
+giftScreen.classList.add("revealed");
+}, 900);
+});
 
     setTimeout(() => {
         cover.classList.add("hidden");
@@ -191,13 +219,9 @@ for (let day = 1; day <= 24; day++) {
     daysGrid.appendChild(button);
 }
 
-// Cerrar la sorpresa
-closeModal.addEventListener("click", () => {
-    surpriseModal.classList.add("hidden");
-});
 
-surpriseModal.addEventListener("click", (event) => {
-    if (event.target === surpriseModal) {
-        surpriseModal.classList.add("hidden");
-    }
+// VOLVER AL CALENDARIO
+backButton.addEventListener("click", () => {
+giftScreen.classList.add("hidden");
+giftScreen.classList.remove("opening", "revealed");
 });

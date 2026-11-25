@@ -1,721 +1,417 @@
+/* =========================================
+LO QUE ESCONDE DICIEMBRE
+ESTILOS GENERALES
+========================================= */
 
 /* BASE */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 
 body {
-    background: #e9e2d5;
-    color: #354438;
-    font-family: Georgia, serif;
+background: #e9e2d5;
+color: #354438;
+font-family: Georgia, serif;
 }
 
 .hidden {
-    display: none !important;
+display: none !important;
 }
 
-/* PORTADA */
+/* =========================================
+PORTADA
+========================================= */
 
 .cover {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-    position: relative;
-    overflow: hidden;
-    background: radial-gradient(
-        ellipse at center,
-        #f5f0e7 0%,
-        #e9e2d5 75%,
-        #d9cebd 100%
-    );
-    transition: opacity 0.8s ease;
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 30px;
+position: relative;
+overflow: hidden;
+
+background: radial-gradient(
+ellipse at center,
+#f5f0e7 0%,
+#e9e2d5 75%,
+#d9cebd 100%
+);
+
+transition: opacity 0.8s ease;
 }
 
 .cover::before {
-    content: "";
-    position: absolute;
-    inset: 24px;
-    border: 1px solid #b5a58d;
-    pointer-events: none;
+content: "";
+position: absolute;
+inset: 24px;
+border: 1px solid #b5a58d;
+pointer-events: none;
 }
 
 .cover::after {
-    content: "";
-    position: absolute;
-    inset: 31px;
-    border: 1px solid rgba(181, 165, 141, 0.35);
-    pointer-events: none;
+content: "";
+position: absolute;
+inset: 31px;
+border: 1px solid rgba(181, 165, 141, 0.35);
+pointer-events: none;
 }
 
 .cover-content {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    animation: appear 1.3s ease both;
-    transition: opacity 0.7s ease, transform 0.7s ease;
+position: relative;
+z-index: 1;
+
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+
+animation: appear 1.3s ease both;
+transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .cover-label {
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: #927e65;
-    margin-bottom: 35px;
+font-size: 10px;
+letter-spacing: 4px;
+color: #927e65;
+margin-bottom: 35px;
 }
 
 .ornament {
-    color: #a58a66;
-    font-size: 15px;
-    letter-spacing: 5px;
-    margin-bottom: 25px;
+color: #a58a66;
+font-size: 15px;
+letter-spacing: 5px;
+margin-bottom: 25px;
 }
 
 .cover-content h1 {
-    font-size: clamp(45px, 9vw, 82px);
-    font-weight: normal;
-    line-height: 1.12;
-    max-width: 700px;
-    letter-spacing: -2px;
+font-size: clamp(45px, 9vw, 82px);
+font-weight: normal;
+line-height: 1.12;
+max-width: 700px;
+letter-spacing: -2px;
 }
 
 .cover-subtitle {
-    font-size: 14px;
-    font-style: italic;
-    color: #8c806d;
-    margin-top: 22px;
+font-size: 14px;
+font-style: italic;
+color: #8c806d;
+margin-top: 22px;
 }
 
 .enter-button {
-    margin-top: 48px;
-    padding: 15px 28px;
-    border: 1px solid #9d8d74;
-    background: transparent;
-    color: #354438;
-    font-family: Georgia, serif;
-    font-size: 13px;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.4s ease;
+margin-top: 48px;
+padding: 15px 28px;
+
+border: 1px solid #9d8d74;
+background: transparent;
+color: #354438;
+
+font-family: Georgia, serif;
+font-size: 13px;
+letter-spacing: 1px;
+
+cursor: pointer;
+transition: all 0.4s ease;
 }
 
 .enter-button span {
-    margin-left: 12px;
+margin-left: 12px;
 }
 
 .enter-button:hover {
-    background: #354438;
-    color: #f5f0e7;
-    transform: translateY(-4px);
+background: #354438;
+color: #f5f0e7;
+transform: translateY(-4px);
 }
 
 .cover-footer {
-    margin-top: 55px;
-    font-size: 9px;
-    letter-spacing: 4px;
-    color: #9c8c76;
+margin-top: 55px;
+font-size: 9px;
+letter-spacing: 4px;
+color: #9c8c76;
 }
 
 .cover-decoration {
-    position: absolute;
-    color: #9b8060;
-    animation: float 5s ease-in-out infinite;
+position: absolute;
+color: #9b8060;
+animation: float 5s ease-in-out infinite;
 }
 
 .decoration-top {
-    top: 12%;
-    font-size: 35px;
+top: 12%;
+font-size: 35px;
 }
 
 .decoration-left {
-    left: 12%;
-    top: 40%;
-    font-size: 28px;
+left: 12%;
+top: 40%;
+font-size: 28px;
 }
 
 .decoration-right {
-    right: 12%;
-    bottom: 30%;
-    font-size: 28px;
-    animation-delay: 1s;
+right: 12%;
+bottom: 30%;
+font-size: 28px;
+animation-delay: 1s;
 }
 
 .cover.leaving .cover-content {
-    opacity: 0;
-    transform: translateY(-15px);
+opacity: 0;
+transform: translateY(-15px);
 }
 
 .cover.leaving {
-    opacity: 0;
-    pointer-events: none;
+opacity: 0;
+pointer-events: none;
 }
 
-/* ENCABEZADO DEL CALENDARIO */
+/* =========================================
+CALENDARIO
+========================================= */
 
 .calendar {
-    min-height: 100vh;
-    padding: 65px 22px;
-    text-align: center;
-    background: radial-gradient(
-        ellipse at top,
-        #f4eee3 0%,
-        #e9e1d4 75%
-    );
+min-height: 100vh;
+padding: 55px 20px 80px;
+text-align: center;
+
+background: radial-gradient(
+ellipse at top,
+#f4eee3 0%,
+#e9e1d4 75%
+);
 }
 
 .calendar-header {
-    max-width: 600px;
-    margin: 0 auto 50px;
+max-width: 600px;
+margin: 0 auto 45px;
 }
 
 .eyebrow {
-    font-size: 11px;
-    letter-spacing: 3px;
-    margin-bottom: 18px;
-    color: #8a7962;
+font-size: 11px;
+letter-spacing: 3px;
+margin-bottom: 18px;
+color: #8a7962;
 }
 
 .calendar-header h2 {
-    font-size: clamp(32px, 6vw, 48px);
-    font-weight: normal;
-    color: #354438;
-    margin-bottom: 15px;
+font-size: clamp(32px, 6vw, 48px);
+font-weight: normal;
+color: #354438;
+margin-bottom: 15px;
 }
 
 .calendar-header > p:last-child {
-    color: #817866;
-    font-size: 15px;
+color: #817866;
+font-size: 15px;
 }
 
-/* COLLAGE DE LOS 24 DÍAS */
+/* =========================================
+COLLAGE DE LOS 24 DÍAS
+========================================= */
 
 .days-grid {
-    max-width: 850px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 115px;
-    grid-auto-flow: dense;
-    gap: 13px;
+max-width: 900px;
+margin: auto;
+
+display: grid;
+grid-template-columns: repeat(6, 1fr);
+grid-auto-rows: 105px;
+grid-auto-flow: dense;
+gap: 12px;
 }
+
+/* TARJETAS */
 
 .day {
-    position: relative;
-    min-width: 0;
-    min-height: 0;
-    border: 1px solid #b9ad98;
-    background: #f5f0e7;
-    color: #354438;
-    font-family: Georgia, serif;
-    font-size: 36px;
-    text-align: left;
-    padding: 15px;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 2px 3px 7px rgba(53, 68, 56, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+position: relative;
+min-width: 0;
+min-height: 0;
+overflow: hidden;
 
-/* FORMAS Y TAMAÑOS */
+display: flex;
+align-items: flex-start;
+justify-content: flex-start;
 
-.day:nth-child(1),
-.day:nth-child(8),
-.day:nth-child(17),
-.day:nth-child(24) {
-    grid-column: span 2;
-}
+padding: 13px;
+border: 1px solid #b9ad98;
+border-radius: 2px;
 
-.day:nth-child(5),
-.day:nth-child(13) {
-    grid-row: span 2;
-}
+font-family: Georgia, serif;
+font-size: 30px;
+text-align: left;
 
-/* PALETA DE COLORES */
+box-shadow: 2px 4px 9px rgba(53, 68, 56, 0.10);
 
-.day:nth-child(3n) {
-    background: #354438;
-    color: #f5f0e7;
-}
-
-.day:nth-child(4n) {
-    background: #6b3439;
-    color: #f5f0e7;
-}
-
-.day:nth-child(5n) {
-    background: #d8c8ad;
-    color: #354438;
-}
-
-.day:nth-child(7n) {
-    background: #eee5d7;
-    color: #6b3439;
-}
-
-/* DETALLES */
-
-.day::after {
-    content: "✦";
-    position: absolute;
-    right: 13px;
-    bottom: 10px;
-    font-size: 17px;
-    opacity: 0.55;
-}
-
-.day:hover:not(:disabled) {
-    transform: translateY(-4px) rotate(-1deg);
-    box-shadow: 4px 7px 12px rgba(53, 68, 56, 0.16);
-}
-
-.day:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-    box-shadow: none;
-}
-
-/* VENTANA DE SORPRESAS */
-
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(35, 43, 35, 0.65);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 10;
-}
-
-.modal-content {
-    position: relative;
-    background: #f5f0e7;
-    padding: 55px 35px;
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-    border: 1px solid #b9ad98;
-}
-
-.modal-content h2 {
-    font-size: 32px;
-    font-weight: normal;
-    margin-bottom: 20px;
-}
-
-.modal-content p:last-child {
-    line-height: 1.7;
-    color: #655f52;
-}
-
-.close-button {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    background: none;
-    border: none;
-    font-size: 28px;
-    color: #354438;
-    cursor: pointer;
-}
-
-/* ANIMACIONES */
-
-@keyframes appear {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-9px);
-    }
-}
-
-/* CELULARES */
-
-@media (max-width: 550px) {
-    .cover-label {
-        letter-spacing: 3px;
-    }
-
-    .decoration-left {
-        left: 8%;
-    }
-
-    .decoration-right {
-        right: 8%;
-    }
-
-    .calendar {
-        padding: 50px 16px;
-    }
-
-    .days-grid {
-        grid-template-columns: repeat(3, 1fr);
-        grid-auto-rows: 100px;
-        gap: 9px;
-    }
-
-    .day {
-        padding: 11px;
-        font-size: 30px;
-    }
-
-    .day:nth-child(1),
-    .day:nth-child(8),
-    .day:nth-child(17),
-    .day:nth-child(24) {
-        grid-column: span 2;
-    }
-}
-
-
-/* =================================
-   COLLAGE EDITORIAL - 24 SORPRESAS
-================================= */
-
-.calendar {
-    padding: 55px 20px 80px;
-}
-
-.calendar-header {
-    margin-bottom: 45px;
-}
-
-.days-grid {
-    max-width: 900px;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: 105px;
-    grid-auto-flow: dense;
-    gap: 12px;
-}
-
-/* BASE DE LAS TARJETAS */
-
-.day {
-    position: relative;
-    min-width: 0;
-    min-height: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 13px;
-    border: 1px solid #b9ad98;
-    border-radius: 2px;
-    font-family: Georgia, serif;
-    font-size: 30px;
-    text-align: left;
-    box-shadow: 2px 4px 9px rgba(53, 68, 56, 0.10);
-    transition: transform .3s ease, box-shadow .3s ease;
+transition:
+transform 0.3s ease,
+box-shadow 0.3s ease;
 }
 
 /* DISTRIBUCIÓN IRREGULAR */
 
 .day:nth-child(1) {
-    grid-column: span 2;
-    grid-row: span 2;
+grid-column: span 2;
+grid-row: span 2;
 }
 
-.day:nth-child(3) {
-    grid-row: span 2;
+.day:nth-child(3),
+.day:nth-child(7),
+.day:nth-child(15),
+.day:nth-child(19) {
+grid-row: span 2;
 }
 
-.day:nth-child(4) {
-    grid-column: span 2;
-}
-
-.day:nth-child(6) {
-    grid-column: span 2;
-}
-
-.day:nth-child(7) {
-    grid-row: span 2;
-}
-
-.day:nth-child(8) {
-    grid-column: span 2;
+.day:nth-child(4),
+.day:nth-child(6),
+.day:nth-child(8),
+.day:nth-child(12),
+.day:nth-child(14),
+.day:nth-child(17),
+.day:nth-child(20),
+.day:nth-child(22) {
+grid-column: span 2;
 }
 
 .day:nth-child(10) {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-
-.day:nth-child(12) {
-    grid-column: span 2;
-}
-
-.day:nth-child(14) {
-    grid-column: span 2;
-}
-
-.day:nth-child(15) {
-    grid-row: span 2;
-}
-
-.day:nth-child(17) {
-    grid-column: span 2;
-}
-
-.day:nth-child(19) {
-    grid-row: span 2;
-}
-
-.day:nth-child(20) {
-    grid-column: span 2;
-}
-
-.day:nth-child(22) {
-    grid-column: span 2;
+grid-column: span 2;
+grid-row: span 2;
 }
 
 .day:nth-child(24) {
-    grid-column: span 2;
-    grid-row: span 2;
+grid-column: span 2;
+grid-row: span 2;
 }
 
-/* COLORES */
+/* PALETA EQUILIBRADA
+6 COLORES - 4 TARJETAS DE CADA UNO */
 
 .day:nth-child(6n + 1) {
-    background: #354438;
-    color: #f5f0e7;
+background: #354438;
+color: #f5f0e7;
 }
 
 .day:nth-child(6n + 2) {
-    background: #eee5d7;
-    color: #6b3439;
+background: #eee5d7;
+color: #6b3439;
 }
 
 .day:nth-child(6n + 3) {
-    background: #d8c8ad;
-    color: #354438;
+background: #d8c8ad;
+color: #354438;
 }
 
 .day:nth-child(6n + 4) {
-    background: #6b3439;
-    color: #f5f0e7;
+background: #6b3439;
+color: #f5f0e7;
 }
 
 .day:nth-child(6n + 5) {
-    background: #f5f0e7;
-    color: #354438;
+background: #f5f0e7;
+color: #354438;
 }
 
 .day:nth-child(6n) {
-    background: #b5a58d;
-    color: #354438;
+background: #b5a58d;
+color: #354438;
 }
 
 /* DETALLES DECORATIVOS */
 
 .day::after {
-    content: "✳";
-    position: absolute;
-    right: 13px;
-    bottom: 9px;
-    font-size: 19px;
-    opacity: .65;
+content: "✳";
+position: absolute;
+right: 13px;
+bottom: 9px;
+font-size: 19px;
+opacity: 0.65;
 }
 
 /* TARJETAS TIPO SOBRE */
-
-.day:nth-child(2),
-.day:nth-child(9),
-.day:nth-child(16),
-.day:nth-child(23) {
-    background: #e8ddca;
-    color: #354438;
-}
 
 .day:nth-child(2)::before,
 .day:nth-child(9)::before,
 .day:nth-child(16)::before,
 .day:nth-child(23)::before {
-    content: "";
-    position: absolute;
-    width: 48px;
-    height: 48px;
-    right: 12px;
-    bottom: 12px;
-    border: 1px solid rgba(107, 52, 57, .55);
-    transform: rotate(45deg);
-    opacity: .65;
+content: "";
+position: absolute;
+
+width: 48px;
+height: 48px;
+right: 12px;
+bottom: 12px;
+
+border: 1px solid rgba(107, 52, 57, 0.55);
+transform: rotate(45deg);
+opacity: 0.65;
 }
 
 /* TARJETAS TIPO FOTOGRAFÍA */
 
-.day:nth-child(5),
-.day:nth-child(11),
-.day:nth-child(18) {
-    background:
-        linear-gradient(145deg, rgba(53,68,56,.08), transparent 60%),
-        #c8b69b;
-    color: #354438;
-}
-
 .day:nth-child(5)::before,
 .day:nth-child(11)::before,
 .day:nth-child(18)::before {
-    content: "";
-    position: absolute;
-    inset: 15px;
-    border: 1px solid rgba(53, 68, 56, .4);
-    transform: rotate(-3deg);
+content: "";
+position: absolute;
+inset: 15px;
+
+border: 1px solid rgba(53, 68, 56, 0.4);
+transform: rotate(-3deg);
 }
 
-/* TARJETAS ESPECIALES */
-
-.day:nth-child(1),
-.day:nth-child(10),
-.day:nth-child(24) {
-    background: #354438;
-    color: #f5f0e7;
-}
+/* DETALLES DE TARJETAS ESPECIALES */
 
 .day:nth-child(1)::after,
 .day:nth-child(10)::after,
 .day:nth-child(24)::after {
-    content: "✦";
-    font-size: 30px;
-    right: 18px;
-    bottom: 14px;
+content: "✦";
+font-size: 30px;
+right: 18px;
+bottom: 14px;
 }
 
 /* INTERACCIÓN */
 
 .day:hover:not(:disabled) {
-    transform: translateY(-4px) rotate(-1deg);
-    box-shadow: 5px 8px 14px rgba(53, 68, 56, .17);
+transform: translateY(-4px) rotate(-1deg);
+box-shadow: 5px 8px 14px rgba(53, 68, 56, 0.17);
 }
 
 .day:disabled {
-    opacity: .85;
-    cursor: not-allowed;
+opacity: 0.85;
+cursor: not-allowed;
+box-shadow: none;
 }
 
-/* DISEÑO PARA CELULAR */
-
-@media (max-width: 550px) {
-    .calendar {
-        padding: 45px 13px 60px;
-    }
-
-    .days-grid {
-        grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: 82px;
-        gap: 8px;
-    }
-
-    .day {
-        padding: 10px;
-        font-size: 25px;
-    }
-
-    .day:nth-child(1),
-    .day:nth-child(10),
-    .day:nth-child(24) {
-        grid-column: span 2;
-        grid-row: span 2;
-    }
-
-    .day:nth-child(3),
-    .day:nth-child(7),
-    .day:nth-child(15),
-    .day:nth-child(19) {
-        grid-row: span 2;
-    }
-
-    .day:nth-child(4),
-    .day:nth-child(6),
-    .day:nth-child(8),
-    .day:nth-child(12),
-    .day:nth-child(14),
-    .day:nth-child(17),
-    .day:nth-child(20),
-    .day:nth-child(22) {
-        grid-column: span 2;
-    }
-
-    .day:nth-child(2)::before,
-    .day:nth-child(9)::before,
-    .day:nth-child(16)::before,
-    .day:nth-child(23)::before {
-        width: 30px;
-        height: 30px;
-    }
-}
-
-
-/* EQUILIBRIO DE COLORES: 4 DE CADA UNO */
-
-.day:nth-child(6n + 1) {
-    background: #354438;
-    color: #f5f0e7;
-}
-
-.day:nth-child(6n + 2) {
-    background: #eee5d7;
-    color: #6b3439;
-}
-
-.day:nth-child(6n + 3) {
-    background: #d8c8ad;
-    color: #354438;
-}
-
-.day:nth-child(6n + 4) {
-    background: #6b3439;
-    color: #f5f0e7;
-}
-
-.day:nth-child(6n + 5) {
-    background: #f5f0e7;
-    color: #354438;
-}
-
-.day:nth-child(6n) {
-    background: #b5a58d;
-    color: #354438;
-}
-
- /* Ocultar completamente las secciones que no corresponden */
-.hidden {
-    display: none !important;
-}
-
-/* =================================
+/* =========================================
 CARTA VINTAGE - REGALOS
-================================= */
+========================================= */
 
 .modal {
-background: rgba(38, 43, 35, 0.78);
-backdrop-filter: blur(4px);
+position: fixed;
+inset: 0;
+z-index: 10;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
 padding: 18px;
 overflow-y: auto;
+
+background: rgba(38, 43, 35, 0.78);
+backdrop-filter: blur(4px);
 }
 
 .modal-content {
 position: relative;
+
 width: 100%;
 max-width: 430px;
+
 min-height: min(680px, calc(100dvh - 36px));
 max-height: calc(100dvh - 36px);
 overflow-y: auto;
@@ -740,11 +436,13 @@ linear-gradient(
 );
 
 border: 1px solid #a99170;
+
 box-shadow:
 0 15px 45px rgba(0, 0, 0, 0.25),
 inset 0 0 35px rgba(151, 126, 91, 0.10);
 
 text-align: center;
+
 animation: letterAppear 0.65s ease both;
 }
 
@@ -754,6 +452,7 @@ animation: letterAppear 0.65s ease both;
 content: "";
 position: absolute;
 inset: 13px;
+
 border: 1px solid rgba(151, 126, 91, 0.65);
 pointer-events: none;
 }
@@ -765,10 +464,13 @@ content: "✦ ❧ ✦";
 position: absolute;
 top: 29px;
 left: 0;
+
 width: 100%;
+
 color: #94734e;
 font-size: 17px;
 letter-spacing: 5px;
+
 pointer-events: none;
 }
 
@@ -806,6 +508,7 @@ line-height: 1.9;
 .surprise-content {
 width: 100%;
 margin-top: 25px;
+
 color: #665746;
 font-family: Georgia, serif;
 line-height: 1.8;
@@ -813,7 +516,9 @@ line-height: 1.8;
 
 .gift-placeholder {
 padding-top: 20px;
+
 border-top: 1px solid rgba(151, 126, 91, 0.4);
+
 font-style: italic;
 font-size: 14px;
 }
@@ -831,15 +536,19 @@ height: 30px;
 
 border: 1px solid rgba(151, 126, 91, 0.5);
 border-radius: 50%;
-background: transparent;
 
+background: transparent;
 color: #735b43;
+
 font-family: Georgia, serif;
 font-size: 21px;
 line-height: 1;
+
 cursor: pointer;
 
-transition: background 0.3s ease, transform 0.3s ease;
+transition:
+background 0.3s ease,
+transform 0.3s ease;
 }
 
 .close-button:hover {
@@ -847,7 +556,31 @@ background: rgba(151, 126, 91, 0.15);
 transform: rotate(90deg);
 }
 
-/* ANIMACIÓN DE APERTURA */
+/* =========================================
+ANIMACIONES
+========================================= */
+
+@keyframes appear {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@keyframes float {
+0%, 100% {
+transform: translateY(0);
+}
+
+50% {
+transform: translateY(-9px);
+}
+}
 
 @keyframes letterAppear {
 from {
@@ -861,9 +594,82 @@ transform: translateY(0) scale(1);
 }
 }
 
-/* AJUSTES PARA CELULAR */
+/* =========================================
+ADAPTACIÓN PARA CELULARES
+========================================= */
 
 @media (max-width: 550px) {
+
+/* PORTADA */
+
+.cover-label {
+letter-spacing: 3px;
+}
+
+.decoration-left {
+left: 8%;
+}
+
+.decoration-right {
+right: 8%;
+}
+
+/* CALENDARIO */
+
+.calendar {
+padding: 45px 13px 60px;
+}
+
+.days-grid {
+grid-template-columns: repeat(4, 1fr);
+grid-auto-rows: 82px;
+gap: 8px;
+}
+
+.day {
+padding: 10px;
+font-size: 25px;
+}
+
+/* DISTRIBUCIÓN EN CELULAR */
+
+.day:nth-child(1),
+.day:nth-child(10),
+.day:nth-child(24) {
+grid-column: span 2;
+grid-row: span 2;
+}
+
+.day:nth-child(3),
+.day:nth-child(7),
+.day:nth-child(15),
+.day:nth-child(19) {
+grid-row: span 2;
+}
+
+.day:nth-child(4),
+.day:nth-child(6),
+.day:nth-child(8),
+.day:nth-child(12),
+.day:nth-child(14),
+.day:nth-child(17),
+.day:nth-child(20),
+.day:nth-child(22) {
+grid-column: span 2;
+}
+
+/* SOBRES */
+
+.day:nth-child(2)::before,
+.day:nth-child(9)::before,
+.day:nth-child(16)::before,
+.day:nth-child(23)::before {
+width: 30px;
+height: 30px;
+}
+
+/* CARTA VINTAGE */
+
 .modal {
 padding: 13px;
 }
@@ -871,8 +677,10 @@ padding: 13px;
 .modal-content {
 width: 100%;
 max-width: 390px;
+
 min-height: min(620px, calc(100dvh - 26px));
 max-height: calc(100dvh - 26px);
+
 padding: 75px 29px 45px;
 }
 

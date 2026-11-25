@@ -12,18 +12,72 @@ const surpriseTitle = document.getElementById("surpriseTitle");
 const surpriseText = document.getElementById("surpriseText");
 const surpriseContent = document.getElementById("surpriseContent");
 
-// Sorpresas de diciembre
+// MODO DE PRUEBA
+// Cambiar a false antes del 1 de diciembre.
+const PREVIEW_MODE = true;
+
+// REGALOS DE DICIEMBRE
 const surprises = [
     {
-        title: "Un comienzo",
+        title: "La bienvenida",
         type: "letter",
         text: "Bienvenido a diciembre. Durante los próximos 24 días vas a encontrar pequeñas sorpresas preparadas especialmente para vos."
     },
-    ...Array.from({ length: 23 }, (_, index) => ({
-        title: `Sorpresa ${index + 2}`,
-        type: "text",
-        text: "Esta sorpresa todavía está esperando a ser descubierta."
-    }))
+    {
+        title: "Una canción que me recuerda a vos",
+        type: "song",
+        text: "Hay canciones que, por alguna razón, terminan teniendo tu nombre."
+    },
+    {
+        title: "¿Cuánto me conocés?",
+        type: "quiz",
+        text: "Llegó el momento de comprobar cuánto prestás atención."
+    },
+    {
+        title: "Una salida al cine",
+        type: "voucher",
+        text: "Este vale es por una salida al cine juntos. Vos elegís la película y yo invito."
+    },
+    {
+        title: "Un regalo para todos los días",
+        type: "physical",
+        text: "Un pequeño regalo para que uses en tu día a día. Espero que te guste."
+    },
+    {
+        title: "Cosas que hacés sin darte cuenta",
+        type: "reveal",
+        text: "Hay un montón de pequeñas cosas tuyas que me encantan. Hoy te cuento algunas."
+    },
+    {
+        title: "Elegí tu aventura",
+        type: "adventure",
+        text: "Esta vez vos decidís cómo sigue la historia."
+    },
+    {
+        title: "Una misión para diciembre",
+        type: "mission",
+        text: "Hoy tenés una misión. No es difícil, pero quiero que la cumplas."
+    },
+    {
+        title: "El museo de nosotros",
+        type: "gallery",
+        text: "Una pequeña colección de recuerdos, lugares y momentos nuestros."
+    },
+    {
+        title: "Un segundo regalo",
+        type: "physical",
+        text: "Bueno, este es tu segundo regalo físico de diciembre. Para el próximo vas a tener que pedírselo a Marti..."
+    },
+    {
+        title: "La banda sonora de nosotros",
+        type: "playlist",
+        text: "Algunas canciones que me hacen acordar a distintos momentos nuestros."
+    },
+    {
+        title: "Una merienda especial",
+        type: "invitation",
+        text: "Esta vez te invito yo. Te espero para compartir una merienda especial."
+    }
 ];
 
 // Abrir el calendario
@@ -37,35 +91,57 @@ enterButton.addEventListener("click", () => {
     }, 800);
 });
 
-// Mostrar el regalo correspondiente
+// Mostrar contenido adicional según el tipo de regalo
 function showGift(surprise) {
     surpriseContent.innerHTML = "";
 
-    if (surprise.type === "photo") {
-        const image = document.createElement("img");
-        image.src = surprise.image;
-        image.alt = "Un recuerdo especial";
-        image.classList.add("gift-photo");
-        surpriseContent.appendChild(image);
-    }
-
     if (surprise.type === "song") {
-        const link = document.createElement("a");
-        link.href = surprise.link;
-        link.textContent = "Escuchar la canción";
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.classList.add("gift-link");
-        surpriseContent.appendChild(link);
+        addPlaceholder("Acá vamos a poner la canción.");
     }
 
-    if (surprise.type === "video") {
-        const video = document.createElement("video");
-        video.src = surprise.video;
-        video.controls = true;
-        video.classList.add("gift-video");
-        surpriseContent.appendChild(video);
+    if (surprise.type === "quiz") {
+        addPlaceholder("Acá vamos a crear el cuestionario interactivo.");
     }
+
+    if (surprise.type === "voucher") {
+        addPlaceholder("VALE POR UNA SALIDA AL CINE");
+    }
+
+    if (surprise.type === "physical") {
+        addPlaceholder("Un regalo preparado especialmente para vos.");
+    }
+
+    if (surprise.type === "reveal") {
+        addPlaceholder("Acá vamos a descubrir las pequeñas cosas, una por una.");
+    }
+
+    if (surprise.type === "adventure") {
+        addPlaceholder("Acá empieza tu aventura.");
+    }
+
+    if (surprise.type === "mission") {
+        addPlaceholder("Tu misión aparecerá acá.");
+    }
+
+    if (surprise.type === "gallery") {
+        addPlaceholder("Acá vamos a armar nuestro museo de recuerdos.");
+    }
+
+    if (surprise.type === "playlist") {
+        addPlaceholder("Acá vamos a reunir nuestra banda sonora.");
+    }
+
+    if (surprise.type === "invitation") {
+        addPlaceholder("Fecha, lugar y menú: próximamente.");
+    }
+}
+
+// Crear textos adicionales
+function addPlaceholder(message) {
+    const paragraph = document.createElement("p");
+    paragraph.textContent = message;
+    paragraph.classList.add("gift-placeholder");
+    surpriseContent.appendChild(paragraph);
 }
 
 // Crear los 24 días
@@ -77,26 +153,37 @@ for (let day = 1; day <= 24; day++) {
 
     const today = new Date();
     const currentDate = new Date(
-        today.toLocaleString("en-US", { timeZone: "America/Montevideo" })
+        today.toLocaleString("en-US", {
+            timeZone: "America/Montevideo"
+        })
     );
 
-    const isDecember = currentDate.getFullYear() === 2026 &&
+    const isDecember =
+        currentDate.getFullYear() === 2026 &&
         currentDate.getMonth() === 11;
 
     const currentDay = isDecember ? currentDate.getDate() : 0;
 
-    if (!isDecember || day > currentDay) {
+    // En modo de prueba se pueden abrir todos los días.
+    if (!PREVIEW_MODE && (!isDecember || day > currentDay)) {
         button.disabled = true;
     }
 
     button.addEventListener("click", () => {
         const surprise = surprises[day - 1];
 
-        surpriseNumber.textContent = `DÍA ${day}`;
-        surpriseTitle.textContent = surprise.title;
-        surpriseText.textContent = surprise.text;
+        if (!surprise) {
+            surpriseNumber.textContent = `DÍA ${day}`;
+            surpriseTitle.textContent = "Todavía falta descubrirlo";
+            surpriseText.textContent = "Esta sorpresa está esperando su momento.";
+            surpriseContent.innerHTML = "";
+        } else {
+            surpriseNumber.textContent = `DÍA ${day}`;
+            surpriseTitle.textContent = surprise.title;
+            surpriseText.textContent = surprise.text;
 
-        showGift(surprise);
+            showGift(surprise);
+        }
 
         surpriseModal.classList.remove("hidden");
     });

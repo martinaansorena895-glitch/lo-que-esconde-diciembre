@@ -700,3 +700,191 @@ body {
 .hidden {
     display: none !important;
 }
+
+/* =================================
+CARTA VINTAGE - REGALOS
+================================= */
+
+.modal {
+background: rgba(38, 43, 35, 0.78);
+backdrop-filter: blur(4px);
+padding: 18px;
+overflow-y: auto;
+}
+
+.modal-content {
+position: relative;
+width: 100%;
+max-width: 430px;
+min-height: min(680px, calc(100dvh - 36px));
+max-height: calc(100dvh - 36px);
+overflow-y: auto;
+
+display: flex;
+flex-direction: column;
+align-items: center;
+
+padding: 75px 38px 55px;
+
+background:
+radial-gradient(
+ellipse at 50% 45%,
+rgba(255, 252, 241, 0.7),
+transparent 75%
+),
+linear-gradient(
+135deg,
+#f5eedf,
+#e9ddc8 55%,
+#f3ead9
+);
+
+border: 1px solid #a99170;
+box-shadow:
+0 15px 45px rgba(0, 0, 0, 0.25),
+inset 0 0 35px rgba(151, 126, 91, 0.10);
+
+text-align: center;
+animation: letterAppear 0.65s ease both;
+}
+
+/* MARCO INTERIOR */
+
+.modal-content::before {
+content: "";
+position: absolute;
+inset: 13px;
+border: 1px solid rgba(151, 126, 91, 0.65);
+pointer-events: none;
+}
+
+/* ORNAMENTO SUPERIOR */
+
+.modal-content::after {
+content: "✦ ❧ ✦";
+position: absolute;
+top: 29px;
+left: 0;
+width: 100%;
+color: #94734e;
+font-size: 17px;
+letter-spacing: 5px;
+pointer-events: none;
+}
+
+/* NÚMERO DEL DÍA */
+
+.modal-content .eyebrow {
+color: #8b6849;
+font-size: 10px;
+letter-spacing: 4px;
+margin-bottom: 22px;
+}
+
+/* TÍTULO */
+
+.modal-content h2 {
+color: #354438;
+font-family: Georgia, serif;
+font-size: clamp(27px, 7vw, 34px);
+font-weight: normal;
+line-height: 1.25;
+margin-bottom: 24px;
+}
+
+/* TEXTO */
+
+.modal-content > p:not(.eyebrow) {
+color: #665746;
+font-family: Georgia, serif;
+font-size: 15px;
+line-height: 1.9;
+}
+
+/* CONTENIDO DEL REGALO */
+
+.surprise-content {
+width: 100%;
+margin-top: 25px;
+color: #665746;
+font-family: Georgia, serif;
+line-height: 1.8;
+}
+
+.gift-placeholder {
+padding-top: 20px;
+border-top: 1px solid rgba(151, 126, 91, 0.4);
+font-style: italic;
+font-size: 14px;
+}
+
+/* BOTÓN PARA CERRAR */
+
+.close-button {
+position: absolute;
+z-index: 2;
+top: 23px;
+right: 25px;
+
+width: 30px;
+height: 30px;
+
+border: 1px solid rgba(151, 126, 91, 0.5);
+border-radius: 50%;
+background: transparent;
+
+color: #735b43;
+font-family: Georgia, serif;
+font-size: 21px;
+line-height: 1;
+cursor: pointer;
+
+transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.close-button:hover {
+background: rgba(151, 126, 91, 0.15);
+transform: rotate(90deg);
+}
+
+/* ANIMACIÓN DE APERTURA */
+
+@keyframes letterAppear {
+from {
+opacity: 0;
+transform: translateY(18px) scale(0.97);
+}
+
+to {
+opacity: 1;
+transform: translateY(0) scale(1);
+}
+}
+
+/* AJUSTES PARA CELULAR */
+
+@media (max-width: 550px) {
+.modal {
+padding: 13px;
+}
+
+.modal-content {
+width: 100%;
+max-width: 390px;
+min-height: min(620px, calc(100dvh - 26px));
+max-height: calc(100dvh - 26px);
+padding: 75px 29px 45px;
+}
+
+.modal-content::before {
+inset: 10px;
+}
+
+.modal-content h2 {
+font-size: 29px;
+}
+
+.modal-content > p:not(.eyebrow) {
+font-size: 14px;
+}
+}

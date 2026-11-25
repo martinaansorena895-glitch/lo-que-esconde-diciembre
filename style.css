@@ -696,3 +696,204 @@ font-size: 29px;
 font-size: 14px;
 }
 }
+
+/* =========================================
+PANTALLAS INDIVIDUALES DE LOS REGALOS
+========================================= */
+
+.gift-screen {
+position: fixed;
+inset: 0;
+z-index: 15;
+
+width: 100%;
+min-height: 100vh;
+overflow-y: auto;
+
+background: #f5f0e7;
+}
+
+/* PANELES DE TRANSICIÓN */
+
+.door-panel {
+position: fixed;
+z-index: 30;
+top: 0;
+bottom: 0;
+width: 50%;
+
+background: #354438;
+transition: transform 0.85s cubic-bezier(.77, 0, .18, 1);
+}
+
+.door-panel.left {
+left: 0;
+border-right: 1px solid #a58a66;
+}
+
+.door-panel.right {
+right: 0;
+border-left: 1px solid #a58a66;
+}
+
+.gift-screen.opening .door-panel.left {
+transform: translateX(-100%);
+}
+
+.gift-screen.opening .door-panel.right {
+transform: translateX(100%);
+}
+
+.gift-screen.revealed .door-panel {
+display: none;
+}
+
+/* ENCABEZADO */
+
+.gift-screen-header {
+position: relative;
+z-index: 2;
+
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+padding: 25px 35px;
+}
+
+.back-button {
+border: 1px solid #b5a58d;
+background: transparent;
+color: #354438;
+
+padding: 11px 17px;
+
+font-family: Georgia, serif;
+font-size: 13px;
+
+cursor: pointer;
+transition: background 0.3s ease;
+}
+
+.back-button:hover {
+background: #e9e2d5;
+}
+
+/* CONTENIDO GENERAL */
+
+.gift-page {
+position: relative;
+z-index: 1;
+
+min-height: calc(100vh - 90px);
+
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+
+padding: 50px 8%;
+text-align: center;
+}
+
+.gift-page h1 {
+max-width: 850px;
+margin-bottom: 25px;
+
+color: #354438;
+font-family: Georgia, serif;
+font-size: clamp(36px, 6vw, 65px);
+font-weight: normal;
+line-height: 1.15;
+}
+
+.gift-page > p {
+max-width: 650px;
+
+color: #665746;
+font-size: 17px;
+line-height: 1.9;
+}
+
+.gift-page .surprise-content {
+width: 100%;
+max-width: 850px;
+margin-top: 35px;
+}
+
+/* DÍA 1: CARTA */
+
+.letter-page {
+width: calc(100% - 40px);
+max-width: 680px;
+min-height: 600px;
+
+margin: 15px auto 50px;
+padding: 90px 55px;
+
+border: 1px solid #b5a58d;
+
+background:
+radial-gradient(ellipse at center, #fffaf0, transparent 80%),
+#eee5d7;
+
+box-shadow: 3px 8px 25px rgba(53, 68, 56, 0.10);
+}
+
+.letter-page::before {
+content: "✦ ❧ ✦";
+color: #94734e;
+font-size: 20px;
+letter-spacing: 6px;
+margin-bottom: 35px;
+}
+
+.letter-page h1 {
+font-size: clamp(32px, 5vw, 45px);
+}
+
+.letter-page > p {
+font-size: 16px;
+}
+
+.letter-page .surprise-content {
+max-width: 480px;
+}
+
+/* CELULAR */
+
+@media (max-width: 550px) {
+
+.gift-screen-header {
+padding: 18px 15px;
+}
+
+.back-button {
+padding: 9px 12px;
+font-size: 12px;
+}
+
+.gift-page {
+min-height: calc(100vh - 75px);
+padding: 35px 22px;
+}
+
+.gift-page h1 {
+font-size: 36px;
+}
+
+.gift-page > p {
+font-size: 15px;
+}
+
+.letter-page {
+width: calc(100% - 26px);
+min-height: 520px;
+margin: 10px auto 30px;
+padding: 75px 27px;
+}
+
+.letter-page h1 {
+font-size: 32px;
+}
+}

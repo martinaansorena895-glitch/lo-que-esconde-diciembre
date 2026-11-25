@@ -47,16 +47,26 @@
 
     </section>
 
-    <!-- VENTANA DE SORPRESAS -->
-    <div id="surpriseModal" class="modal hidden">
-        <div class="modal-content">
-            <button id="closeModal" class="close-button">×</button>
-            <p id="surpriseNumber" class="eyebrow"></p>
-            <h2 id="surpriseTitle"></h2>
-            <p id="surpriseText"></p>
-            <div id="surpriseContent" class="surprise-content"></div>
-        </div>
-    </div>
+ <!-- PANTALLA INDIVIDUAL DE CADA REGALO -->
+<section id="giftScreen" class="gift-screen hidden">
+
+<div class="door-panel left"></div>
+<div class="door-panel right"></div>
+
+<header class="gift-screen-header">
+<button id="backButton" class="back-button">
+← Volver a diciembre
+</button>
+<p id="surpriseNumber" class="eyebrow"></p>
+</header>
+
+<main id="giftPage" class="gift-page">
+<h1 id="surpriseTitle"></h1>
+<p id="surpriseText"></p>
+<div id="surpriseContent" class="surprise-content"></div>
+</main>
+
+</section>
 
     <script src="script.js"></script>
 

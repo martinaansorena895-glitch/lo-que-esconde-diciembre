@@ -1,8 +1,16 @@
+/* =========================================
+LO QUE ESCONDE DICIEMBRE
+FUNCIONES GENERALES
+========================================= */
+
+// ELEMENTOS DE LA PÁGINA
+
 const enterButton = document.getElementById("enterButton");
 const cover = document.getElementById("cover");
 const calendar = document.getElementById("calendar");
 
 const daysGrid = document.getElementById("daysGrid");
+
 const giftScreen = document.getElementById("giftScreen");
 const backButton = document.getElementById("backButton");
 const giftPage = document.getElementById("giftPage");
@@ -12,11 +20,21 @@ const surpriseTitle = document.getElementById("surpriseTitle");
 const surpriseText = document.getElementById("surpriseText");
 const surpriseContent = document.getElementById("surpriseContent");
 
+
+/* =========================================
+CONFIGURACIÓN
+========================================= */
+
 // MODO DE PRUEBA
 // Cambiar a false antes del 1 de diciembre.
+
 const PREVIEW_MODE = true;
 
-// REGALOS DE DICIEMBRE
+
+/* =========================================
+REGALOS DE DICIEMBRE
+========================================= */
+
 const surprises = [
 {
 title: "La bienvenida",
@@ -80,106 +98,109 @@ text: "Esta vez te invito yo. Te espero para compartir una merienda especial."
 }
 ];
 
-// ABRIR EL CALENDARIO
+
+/* =========================================
+ABRIR EL CALENDARIO
+========================================= */
+
 enterButton.addEventListener("click", () => {
+
 cover.classList.add("leaving");
 
 setTimeout(() => {
 cover.classList.add("hidden");
 cover.classList.remove("leaving");
+
 calendar.classList.remove("hidden");
 }, 800);
+
 });
 
-// MOSTRAR CONTENIDO SEGÚN EL TIPO DE REGALO
+
+/* =========================================
+CONTENIDO DE LOS REGALOS
+========================================= */
+
 function showGift(surprise) {
+
 surpriseContent.innerHTML = "";
 
-if (surprise.type === "song") {
-addPlaceholder("Acá vamos a poner la canción.");
+const placeholders = {
+song: "Acá vamos a poner la canción.",
+quiz: "Acá vamos a crear el cuestionario interactivo.",
+voucher: "VALE POR UNA SALIDA AL CINE",
+physical: "Un regalo preparado especialmente para vos.",
+reveal: "Acá vamos a descubrir las pequeñas cosas, una por una.",
+adventure: "Acá empieza tu aventura.",
+mission: "Tu misión aparecerá acá.",
+gallery: "Acá vamos a armar nuestro museo de recuerdos.",
+playlist: "Acá vamos a reunir nuestra banda sonora.",
+invitation: "Fecha, lugar y menú: próximamente."
+};
+
+const message = placeholders[surprise.type];
+
+if (message) {
+addPlaceholder(message);
 }
 
-if (surprise.type === "quiz") {
-addPlaceholder("Acá vamos a crear el cuestionario interactivo.");
 }
 
-if (surprise.type === "voucher") {
-addPlaceholder("VALE POR UNA SALIDA AL CINE");
-}
-
-if (surprise.type === "physical") {
-addPlaceholder("Un regalo preparado especialmente para vos.");
-}
-
-if (surprise.type === "reveal") {
-addPlaceholder("Acá vamos a descubrir las pequeñas cosas, una por una.");
-}
-
-if (surprise.type === "adventure") {
-addPlaceholder("Acá empieza tu aventura.");
-}
-
-if (surprise.type === "mission") {
-addPlaceholder("Tu misión aparecerá acá.");
-}
-
-if (surprise.type === "gallery") {
-addPlaceholder("Acá vamos a armar nuestro museo de recuerdos.");
-}
-
-if (surprise.type === "playlist") {
-addPlaceholder("Acá vamos a reunir nuestra banda sonora.");
-}
-
-if (surprise.type === "invitation") {
-addPlaceholder("Fecha, lugar y menú: próximamente.");
-}
-}
 
 // CREAR TEXTOS ADICIONALES
+
 function addPlaceholder(message) {
+
 const paragraph = document.createElement("p");
+
 paragraph.textContent = message;
 paragraph.classList.add("gift-placeholder");
+
 surpriseContent.appendChild(paragraph);
+
 }
 
-// CREAR LOS 24 DÍAS
-for (let day = 1; day <= 24; day++) {
-const button = document.createElement("button");
 
-button.classList.add("day");
-button.textContent = String(day).padStart(2, "0");
+/* =========================================
+FECHA ACTUAL EN URUGUAY
+========================================= */
 
-const today = new Date();
-const currentDate = new Date(
-today.toLocaleString("en-US", {
-timeZone: "America/Montevideo"
-})
-);
+function getUruguayDate() {
 
-const isDecember =
-currentDate.getFullYear() === 2026 &&
-currentDate.getMonth() === 11;
+const parts = new Intl.DateTimeFormat("en-US", {
+timeZone: "America/Montevideo",
+year: "numeric",
+month: "numeric",
+day: "numeric"
+}).formatToParts(new Date());
 
-const currentDay = isDecember ? currentDate.getDate() : 0;
+const dateParts = {};
 
-if (!PREVIEW_MODE && (!isDecember || day > currentDay)) {
-button.disabled = true;
+parts.forEach(part => {
+dateParts[part.type] = Number(part.value);
+});
+
+return {
+year: dateParts.year,
+month: dateParts.month,
+day: dateParts.day
+};
+
 }
 
-// ABRIR LA PANTALLA DEL REGALO
-button.addEventListener("click", () => {
+
+/* =========================================
+ABRIR LA PANTALLA DE CADA REGALO
+========================================= */
+
+function openGift(day) {
+
 const surprise = surprises[day - 1];
 
 surpriseNumber.textContent = `DÍA ${day}`;
 
-if (!surprise) {
-surpriseTitle.textContent = "Todavía falta descubrirlo";
-surpriseText.textContent = "Esta sorpresa está esperando su momento.";
-surpriseContent.innerHTML = "";
-giftPage.className = "gift-page experience-page";
-} else {
+if (surprise) {
+
 surpriseTitle.textContent = surprise.title;
 surpriseText.textContent = surprise.text;
 
@@ -188,26 +209,82 @@ showGift(surprise);
 giftPage.className = surprise.type === "letter"
 ? "gift-page letter-page"
 : "gift-page experience-page";
+
+} else {
+
+surpriseTitle.textContent = "Todavía falta descubrirlo";
+surpriseText.textContent = "Esta sorpresa está esperando su momento.";
+
+surpriseContent.innerHTML = "";
+
+giftPage.className = "gift-page experience-page";
+
 }
+
+// Mostrar la pantalla con los paneles cerrados.
 
 giftScreen.classList.remove("hidden");
-giftScreen.classList.remove("opening", "revealed");
+giftScreen.classList.remove("opening");
 
-// Forzar al navegador a registrar el estado inicial
-giftScreen.offsetWidth;
+// Forzar al navegador a registrar la posición inicial.
 
-// Iniciar la transición
-giftScreen.classList.add("opening");
+void giftScreen.offsetWidth;
+
+// Esperar un instante antes de abrir los paneles.
 
 setTimeout(() => {
-giftScreen.classList.add("revealed");
-}, 900);
+giftScreen.classList.add("opening");
+}, 60);
 
-daysGrid.appendChild(button);
 }
 
-// VOLVER AL CALENDARIO
+
+/* =========================================
+CREAR LOS 24 DÍAS
+========================================= */
+
+const currentDate = getUruguayDate();
+
+const isDecember =
+currentDate.year === 2026 &&
+currentDate.month === 12;
+
+const currentDay = isDecember ? currentDate.day : 0;
+
+
+for (let day = 1; day <= 24; day++) {
+
+const button = document.createElement("button");
+
+button.classList.add("day");
+button.textContent = String(day).padStart(2, "0");
+
+// Bloquear los días futuros fuera del modo de prueba.
+
+if (!PREVIEW_MODE && (!isDecember || day > currentDay)) {
+button.disabled = true;
+}
+
+// Abrir el regalo correspondiente.
+
+button.addEventListener("click", () => {
+openGift(day);
+});
+
+// Agregar el botón al calendario.
+
+daysGrid.appendChild(button);
+
+}
+
+
+/* =========================================
+VOLVER AL CALENDARIO
+========================================= */
+
 backButton.addEventListener("click", () => {
+
 giftScreen.classList.add("hidden");
-giftScreen.classList.remove("opening", "revealed");
+giftScreen.classList.remove("opening");
+
 });

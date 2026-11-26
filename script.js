@@ -32,17 +32,17 @@ const surprises = [
 {
 title: "La bienvenida",
 type: "letter",
-text: "Bienvenido a diciembre. Durante los próximos 24 días vas a encontrar pequeñas sorpresas preparadas especialmente para vos."
+text: "Hola mi Amor, bienvenido a diciembre. Durante los próximos 24 días vas a encontrar algunas sorpresas preparadas especialmente para vos."
 },
 {
 title: "Una canción que me recuerda a vos",
 type: "song",
-text: "Hay canciones que quedan asociadas a un momento, y esta es una de ellas."
+text: "Hay canciones que quedan asociadas a un recuerdo, y esta es una de ellas."
 },
 {
 title: "¿Cuánto me conocés?",
 type: "quiz",
-text: "Llegó el momento de comprobar cuánto prestás atención."
+text: "Llegó el momento de comprobar que tanto me prestás atención."
 },
 {
 title: "Una salida al cine",
@@ -52,17 +52,17 @@ text: "Este vale es por una salida al cine juntos. Vos elegís la película y yo
 {
 title: "Un regalo para todos los días",
 type: "physical",
-text: "Un pequeño regalo para que uses en tu día a día. Espero que te guste."
+text: "Un regalo para que uses en tu día a día. Espero que te guste."
 },
 {
 title: "Cosas que hacés sin darte cuenta",
 type: "reveal",
-text: "Hay un montón de pequeñas cosas tuyas que me encantan. Hoy te cuento algunas."
+text: "Hay un montón de cosas tuyas que me encantan. Hoy te cuento algunas."
 },
 {
 title: "Elegí tu aventura",
 type: "adventure",
-text: "Esta vez vos decidís cómo sigue la historia."
+text: "Esta vez vos decidís."
 },
 {
 title: "Una misión para diciembre",
@@ -77,7 +77,7 @@ text: "Una pequeña colección de recuerdos, lugares y momentos nuestros."
 {
 title: "Un segundo regalo",
 type: "physical",
-text: "Bueno, este es tu segundo regalo físico de diciembre. Para el próximo vas a tener que pedírselo a Marti..."
+text: "Bueno, este es tu segundo regalo físico de diciembre. Vas a tener que pedirmelo a mi..."
 },
 {
 title: "La banda sonora de nosotros",
@@ -141,14 +141,13 @@ const letter = createElement("div", "letter-content");
 
 letter.innerHTML = `
 <p>
-No quería regalarte simplemente 24 cosas.
-Quería preparar algo que pudiéramos ir descubriendo
-juntos, un poquito cada día.
+No quería solamente regalarte 1 cosa.
+Quería preparar algo que pudiéras ir descubriendo,
+un poquito cada día.
 </p>
 
 <p>
-Hay regalos, recuerdos, canciones, juegos y algunas
-sorpresas que espero que te gusten.
+Hay algunas sorpresas que espero que te gusten.
 </p>
 
 <p>
@@ -192,7 +191,7 @@ Escuchar canción ↗
 
 <div class="song-memory">
 <p>
-Fue una de las primeras canciones que pusiste
+Fue una canción que pusiste
 en tus notas de Instagram y no te imaginás
 lo que me emocioné cuando la vi.
 </p>
@@ -200,8 +199,8 @@ lo que me emocioné cuando la vi.
 <p>
 Obviamente, se la mandé a todas mis amigas.
 Me acuerdo de ese momento y me sigue pareciendo
-increíble que una canción haya terminado
-significando tanto para mí.
+increíble que justo hayas pensado en poner la parte del café 
+como para que me de cuenta que era para mi :)
 </p>
 </div>
 `;
@@ -216,38 +215,41 @@ DÍA 3: CUESTIONARIO
 
 const quizQuestions = [
 {
-question: "¿Cuál es una de mis bandas favoritas?",
-answers: ["Oasis", "Coldplay", "Imagine Dragons"],
-correct: 0
+  question: "¿Cuál es una de mis bandas favoritas?",
+  answers: ["Oasis", "Coldplay", "The Killers"],
+  correct: 0
 },
 {
-question: "¿Qué materias me gustan más?",
-answers: [
-"Historia y Literatura",
-"Matemática y Física",
-"Biología y Filosofía"
-],
+question: "¿Qué país me gustaría conocer?",
+answers: ["Italia","Inglaterra","Grecia"],
 correct: 1
 },
 {
-question: "¿Qué estilo musical suelo escuchar?",
-answers: [
-"Rock alternativo y música de los 80/90",
-"Reggaetón exclusivamente",
-"Música electrónica exclusivamente"
-],
+question: "¿Qué es algo que más valore en vos cuando te conocí?",
+answers: ["Lo lindo que sos","Tu inteligencia","Tu sentido del humor"],
+correct: 1
+},
+{
+question: "¿Qué comida me hace acordame a nosotros?",
+answers: ["Lemon pie","Brownies","Cookies"],
 correct: 0
 },
 {
-question: "¿Qué me gusta más?",
-answers: [
-"Los planes sin organizar",
-"Los planes y detalles bien pensados",
-"No hacer absolutamente nada"
-],
+question: "¿Qué lugar me gusta más en mvd",
+answers: ["Punta Carretas","Carrasco","Ciudad Vieja"],
+correct: 2
+},
+{
+question: "¿Qué tipo de peliculas ODIO?",
+answers: ["Comedias romanticas","Terror","Misterio"],
 correct: 1
+},
+{
+question: "¿Qué cosa me cuesta más elegir?",
+answers: ["Que ropa ponerme","Que pelicula/serie mirar","Que vamos a almorzar/cenar","Todas las anteriores"],
+correct: 3
 }
-];
+ ];
 
 function showQuiz() {
 let questionIndex = 0;
@@ -278,6 +280,18 @@ const button = createButton(
 answer,
 "quiz-option",
 () => {
+const allButtons = answers.querySelectorAll("button");
+
+allButtons.forEach((btn, i) => {
+btn.disabled = true;
+
+if (i === current.correct) {
+btn.classList.add("correct-answer");
+} else if (i === index) {
+btn.classList.add("wrong-answer");
+}
+});
+
 if (index === current.correct) {
 score++;
 feedback.textContent = "¡Bien! Esa era.";
@@ -285,8 +299,27 @@ feedback.textContent = "¡Bien! Esa era.";
 feedback.textContent = "Mmm... esa no era.";
 }
 
-answers.querySelectorAll("button").forEach(btn => {
-btn.disabled = true;
+const next = createButton(
+questionIndex === quizQuestions.length - 1
+? "Ver resultado"
+: "Siguiente pregunta →",
+"gift-action",
+() => {
+questionIndex++;
+
+if (questionIndex < quizQuestions.length) {
+renderQuestion();
+} else {
+showResult();
+}
+}
+);
+
+answers.appendChild(next);
+}
+);
+
+answers.appendChild(button);
 });
 
 const next = createButton(
@@ -343,7 +376,7 @@ voucher.innerHTML = `
 <h2>VALE POR</h2>
 <h3>Una salida al cine</h3>
 <p>Una película elegida por vos.</p>
-<p>Las entradas corren por mi cuenta.</p>
+<p>Las entradas las pago yo.</p>
 <div class="voucher-footer">VÁLIDO PARA DOS · MARTI & TIAGO</div>
 `;
 
@@ -367,6 +400,9 @@ card.innerHTML = `
 Algo para que uses, lleves contigo
 y te acuerdes de mí.
 </p>
+<p>
+Vas a tener que pedirmelo a mi :)
+</p>
 <small>iPhone 13 Pro edition</small>
 `;
 } else {
@@ -379,8 +415,7 @@ Bueno, este es tu segundo regalo físico
 de diciembre.
 </p>
 <p>
-Para el próximo vas a tener que
-pedírselo a Marti...
+vas a tener que pedirmelo a mi...
 </p>
 `;
 }
@@ -396,8 +431,8 @@ DÍA 6: PEQUEÑOS DETALLES
 function showReveal() {
 const details = [
 "Acá va una de esas pequeñas cosas que hacés y me encantan.",
-"Acá va otro detalle que quizás ni te das cuenta de que hacés.",
-"Y acá, una cosa más que hace que seas vos."
+"Acá va otro detalle que ni te das cuenta de que hacés.",
+"Y algunas cosas que son muy vos."
 ];
 
 const area = createElement("div", "reveal-area");
@@ -457,15 +492,15 @@ const result = createElement("p", "adventure-result");
 const options = [
 {
 text: "Salir a recorrer algún lugar nuevo",
-result: "Terminamos descubriendo un lugar que no conocíamos. Y, seguramente, buscando dónde merendar."
+result: "Me encanta! ¿Pensamos juntos ?"
 },
 {
 text: "Quedarnos juntos viendo una película",
-result: "Elegimos una película, preparamos algo rico y convertimos una tarde cualquiera en un buen plan."
+result: "Demás! ¿Vamos a elegir la peli y a preparar algo rico?"
 },
 {
-text: "Improvisar y ver qué pasa",
-result: "No hay plan, no hay horarios y no sabemos dónde terminamos. Pero estamos juntos."
+text: "Hacer una tarde de juegos?",
+result: "No tenia muchas ideas, si elegiste esta, vas a tener que preparate porque ahora es competencia!"
 }
 ];
 
@@ -503,11 +538,11 @@ card.innerHTML = `
 <h2>Tu misión:</h2>
 <p>
 Elegí un día de diciembre para que hagamos
-algo distinto de nuestra rutina.
+algo distinto.
 </p>
 <p>
 Puede ser conocer un lugar nuevo,
-probar algo diferente o simplemente
+probar algo diferente o
 hacer un plan que nunca hacemos.
 </p>
 <small>La única regla: hacerlo juntos.</small>
@@ -515,7 +550,6 @@ hacer un plan que nunca hacemos.
 
 surpriseContent.appendChild(card);
 }
-
 
 /* =========================================
 DÍA 9: MUSEO DE NOSOTROS
@@ -526,14 +560,17 @@ const gallery = createElement("div", "memory-gallery");
 
 const memories = [
 {
+image: "imagenes/foto-1.jpg",
 title: "Un lugar",
 description: "Un lugar que forma parte de nuestra historia."
 },
 {
+image: "imagenes/foto-2.jpg",
 title: "Un momento",
 description: "Uno de esos recuerdos que me gusta volver a mirar."
 },
 {
+image: "imagenes/foto-3.jpg",
 title: "Nosotros",
 description: "Una foto que merece estar en este pequeño museo."
 }
@@ -544,7 +581,7 @@ const item = createElement("div", "memory-item");
 
 item.innerHTML = `
 <div class="memory-photo">
-<span>✧</span>
+<img src="${memory.image}" alt="${memory.title}">
 </div>
 <h3>${memory.title}</h3>
 <p>${memory.description}</p>
@@ -562,7 +599,6 @@ const note = createElement(
 surpriseContent.append(gallery, note);
 }
 
-
 /* =========================================
 DÍA 11: BANDA SONORA
 ========================================= */
@@ -571,12 +607,43 @@ const soundtrack = [
 {
 title: "I Wanna Be Yours",
 artist: "Arctic Monkeys",
-album: "AM",
+album: "IWBY",
 year: "2013",
 note: "La canción que me hizo acordar de aquel momento."
+},
+
+{
+title: "Enamorado Tuyo",
+artist: "El cuarteto de Nos",
+album: "ILY",
+year: "2012",
+note: "Una canción que me recuerda a cuando, el año pasado, trabajamos juntos en tu cuarto mientras la escuchabamos."
+},
+
+{
+title: "Shivers",
+artist: "Ed Sheeran",
+album: "SH",
+year: "2021",
+note: "Odio a Ed Sheeran, pero esta canción me recueeda a un momento especifico: estaba sonando antes de que entraramos al show de Candlelights. Yo estaba super emocionada, me sentia linda y muy feliz de estar contigo y compartit ese momento contigo."
+},
+
+{
+title: "Nosotros",
+artist: "Babasonicos",
+album: "US",
+year: "2008",
+note: "Esta es una canción que me recuerda más a nuestro primer año, pero también me recuerda que, aunque tengamos defectos, nos elegimos todos los dias. "
+},
+
+{
+title: "Songbird",
+artist: "Oasis",
+album: "SB",
+year: "2002",
+note: "Y como no puede faltar: Oasis. Esta canción puede que no la conozcas tanto, pero expresa mi admiración y mi amor hacia ti. "
 }
 
-// Acá vamos a agregar las demás canciones.
 ];
 
 function showPlaylist() {

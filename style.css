@@ -745,7 +745,7 @@ transform: translateX(100%);
 }
 
 .gift-screen.revealed .door-panel {
-  opacity:0
+  opacity:0;
   transition: opacity 0.2s ease 0.85s;
   pointer-events:none;
 }

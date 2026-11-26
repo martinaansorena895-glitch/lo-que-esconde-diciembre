@@ -745,7 +745,9 @@ transform: translateX(100%);
 }
 
 .gift-screen.revealed .door-panel {
-display: none;
+  opacity:0
+  transition: opacity 0.2s ease 0.85s;
+  pointer-events:none;
 }
 
 /* ENCABEZADO */

@@ -706,6 +706,13 @@ position: fixed;
 inset: 0;
 z-index: 15;
 
+.gift-screen.hidden {
+  display: none !important;
+}
+.gift-screen:not(.hidden) {
+  display:block !important;
+}
+
 width: 100%;
 min-height: 100vh;
 overflow-y: auto;

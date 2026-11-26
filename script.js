@@ -1,4 +1,3 @@
-
 const enterButton = document.getElementById("enterButton");
 const cover = document.getElementById("cover");
 const calendar = document.getElementById("calendar");
@@ -19,70 +18,158 @@ const PREVIEW_MODE = true;
 
 // REGALOS DE DICIEMBRE
 const surprises = [
-    {
-        title: "La bienvenida",
-        type: "letter",
-        text: "Bienvenido a diciembre. Durante los próximos 24 días vas a encontrar pequeñas sorpresas preparadas especialmente para vos."
-    },
-    {
-        title: "Una canción que me recuerda a vos",
-        type: "song",
-        text: "Hay canciones que, por alguna razón, terminan teniendo tu nombre."
-    },
-    {
-        title: "¿Cuánto me conocés?",
-        type: "quiz",
-        text: "Llegó el momento de comprobar cuánto prestás atención."
-    },
-    {
-        title: "Una salida al cine",
-        type: "voucher",
-        text: "Este vale es por una salida al cine juntos. Vos elegís la película y yo invito."
-    },
-    {
-        title: "Un regalo para todos los días",
-        type: "physical",
-        text: "Un pequeño regalo para que uses en tu día a día. Espero que te guste."
-    },
-    {
-        title: "Cosas que hacés sin darte cuenta",
-        type: "reveal",
-        text: "Hay un montón de pequeñas cosas tuyas que me encantan. Hoy te cuento algunas."
-    },
-    {
-        title: "Elegí tu aventura",
-        type: "adventure",
-        text: "Esta vez vos decidís cómo sigue la historia."
-    },
-    {
-        title: "Una misión para diciembre",
-        type: "mission",
-        text: "Hoy tenés una misión. No es difícil, pero quiero que la cumplas."
-    },
-    {
-        title: "El museo de nosotros",
-        type: "gallery",
-        text: "Una pequeña colección de recuerdos, lugares y momentos nuestros."
-    },
-    {
-        title: "Un segundo regalo",
-        type: "physical",
-        text: "Bueno, este es tu segundo regalo físico de diciembre. Para el próximo vas a tener que pedírselo a Marti..."
-    },
-    {
-        title: "La banda sonora de nosotros",
-        type: "playlist",
-        text: "Algunas canciones que me hacen acordar a distintos momentos nuestros."
-    },
-    {
-        title: "Una merienda especial",
-        type: "invitation",
-        text: "Esta vez te invito yo. Te espero para compartir una merienda especial."
-    }
+{
+title: "La bienvenida",
+type: "letter",
+text: "Bienvenido a diciembre. Durante los próximos 24 días vas a encontrar pequeñas sorpresas preparadas especialmente para vos."
+},
+{
+title: "Una canción que me recuerda a vos",
+type: "song",
+text: "Hay canciones que, por alguna razón, terminan teniendo tu nombre."
+},
+{
+title: "¿Cuánto me conocés?",
+type: "quiz",
+text: "Llegó el momento de comprobar cuánto prestás atención."
+},
+{
+title: "Una salida al cine",
+type: "voucher",
+text: "Este vale es por una salida al cine juntos. Vos elegís la película y yo invito."
+},
+{
+title: "Un regalo para todos los días",
+type: "physical",
+text: "Un pequeño regalo para que uses en tu día a día. Espero que te guste."
+},
+{
+title: "Cosas que hacés sin darte cuenta",
+type: "reveal",
+text: "Hay un montón de pequeñas cosas tuyas que me encantan. Hoy te cuento algunas."
+},
+{
+title: "Elegí tu aventura",
+type: "adventure",
+text: "Esta vez vos decidís cómo sigue la historia."
+},
+{
+title: "Una misión para diciembre",
+type: "mission",
+text: "Hoy tenés una misión. No es difícil, pero quiero que la cumplas."
+},
+{
+title: "El museo de nosotros",
+type: "gallery",
+text: "Una pequeña colección de recuerdos, lugares y momentos nuestros."
+},
+{
+title: "Un segundo regalo",
+type: "physical",
+text: "Bueno, este es tu segundo regalo físico de diciembre. Para el próximo vas a tener que pedírselo a Marti..."
+},
+{
+title: "La banda sonora de nosotros",
+type: "playlist",
+text: "Algunas canciones que me hacen acordar a distintos momentos nuestros."
+},
+{
+title: "Una merienda especial",
+type: "invitation",
+text: "Esta vez te invito yo. Te espero para compartir una merienda especial."
+}
 ];
 
-// Abrir el calendario
-enterbutton.addEventListener("click", () => {
+// ABRIR EL CALENDARIO
+enterButton.addEventListener("click", () => {
+cover.classList.add("leaving");
+
+setTimeout(() => {
+cover.classList.add("hidden");
+cover.classList.remove("leaving");
+calendar.classList.remove("hidden");
+}, 800);
+});
+
+// MOSTRAR CONTENIDO SEGÚN EL TIPO DE REGALO
+function showGift(surprise) {
+surpriseContent.innerHTML = "";
+
+if (surprise.type === "song") {
+addPlaceholder("Acá vamos a poner la canción.");
+}
+
+if (surprise.type === "quiz") {
+addPlaceholder("Acá vamos a crear el cuestionario interactivo.");
+}
+
+if (surprise.type === "voucher") {
+addPlaceholder("VALE POR UNA SALIDA AL CINE");
+}
+
+if (surprise.type === "physical") {
+addPlaceholder("Un regalo preparado especialmente para vos.");
+}
+
+if (surprise.type === "reveal") {
+addPlaceholder("Acá vamos a descubrir las pequeñas cosas, una por una.");
+}
+
+if (surprise.type === "adventure") {
+addPlaceholder("Acá empieza tu aventura.");
+}
+
+if (surprise.type === "mission") {
+addPlaceholder("Tu misión aparecerá acá.");
+}
+
+if (surprise.type === "gallery") {
+addPlaceholder("Acá vamos a armar nuestro museo de recuerdos.");
+}
+
+if (surprise.type === "playlist") {
+addPlaceholder("Acá vamos a reunir nuestra banda sonora.");
+}
+
+if (surprise.type === "invitation") {
+addPlaceholder("Fecha, lugar y menú: próximamente.");
+}
+}
+
+// CREAR TEXTOS ADICIONALES
+function addPlaceholder(message) {
+const paragraph = document.createElement("p");
+paragraph.textContent = message;
+paragraph.classList.add("gift-placeholder");
+surpriseContent.appendChild(paragraph);
+}
+
+// CREAR LOS 24 DÍAS
+for (let day = 1; day <= 24; day++) {
+const button = document.createElement("button");
+
+button.classList.add("day");
+button.textContent = String(day).padStart(2, "0");
+
+const today = new Date();
+const currentDate = new Date(
+today.toLocaleString("en-US", {
+timeZone: "America/Montevideo"
+})
+);
+
+const isDecember =
+currentDate.getFullYear() === 2026 &&
+currentDate.getMonth() === 11;
+
+const currentDay = isDecember ? currentDate.getDate() : 0;
+
+if (!PREVIEW_MODE && (!isDecember || day > currentDay)) {
+button.disabled = true;
+}
+
+// ABRIR LA PANTALLA DEL REGALO
+button.addEventListener("click", () => {
 const surprise = surprises[day - 1];
 
 surpriseNumber.textContent = `DÍA ${day}`;
@@ -112,113 +199,8 @@ giftScreen.classList.add("revealed");
 }, 900);
 });
 
-    setTimeout(() => {
-        cover.classList.add("hidden");
-        cover.classList.remove("leaving");
-        calendar.classList.remove("hidden");
-    }, 800);
-});
-
-// Mostrar contenido adicional según el tipo de regalo
-function showGift(surprise) {
-    surpriseContent.innerHTML = "";
-
-    if (surprise.type === "song") {
-        addPlaceholder("Acá vamos a poner la canción.");
-    }
-
-    if (surprise.type === "quiz") {
-        addPlaceholder("Acá vamos a crear el cuestionario interactivo.");
-    }
-
-    if (surprise.type === "voucher") {
-        addPlaceholder("VALE POR UNA SALIDA AL CINE");
-    }
-
-    if (surprise.type === "physical") {
-        addPlaceholder("Un regalo preparado especialmente para vos.");
-    }
-
-    if (surprise.type === "reveal") {
-        addPlaceholder("Acá vamos a descubrir las pequeñas cosas, una por una.");
-    }
-
-    if (surprise.type === "adventure") {
-        addPlaceholder("Acá empieza tu aventura.");
-    }
-
-    if (surprise.type === "mission") {
-        addPlaceholder("Tu misión aparecerá acá.");
-    }
-
-    if (surprise.type === "gallery") {
-        addPlaceholder("Acá vamos a armar nuestro museo de recuerdos.");
-    }
-
-    if (surprise.type === "playlist") {
-        addPlaceholder("Acá vamos a reunir nuestra banda sonora.");
-    }
-
-    if (surprise.type === "invitation") {
-        addPlaceholder("Fecha, lugar y menú: próximamente.");
-    }
+daysGrid.appendChild(button);
 }
-
-// Crear textos adicionales
-function addPlaceholder(message) {
-    const paragraph = document.createElement("p");
-    paragraph.textContent = message;
-    paragraph.classList.add("gift-placeholder");
-    surpriseContent.appendChild(paragraph);
-}
-
-// Crear los 24 días
-for (let day = 1; day <= 24; day++) {
-    const button = document.createElement("button");
-
-    button.classList.add("day");
-    button.textContent = String(day).padStart(2, "0");
-
-    const today = new Date();
-    const currentDate = new Date(
-        today.toLocaleString("en-US", {
-            timeZone: "America/Montevideo"
-        })
-    );
-
-    const isDecember =
-        currentDate.getFullYear() === 2026 &&
-        currentDate.getMonth() === 11;
-
-    const currentDay = isDecember ? currentDate.getDate() : 0;
-
-    // En modo de prueba se pueden abrir todos los días.
-    if (!PREVIEW_MODE && (!isDecember || day > currentDay)) {
-        button.disabled = true;
-    }
-
-    button.addEventListener("click", () => {
-        const surprise = surprises[day - 1];
-
-        if (!surprise) {
-            surpriseNumber.textContent = `DÍA ${day}`;
-            surpriseTitle.textContent = "Todavía falta descubrirlo";
-            surpriseText.textContent = "Esta sorpresa está esperando su momento.";
-            surpriseContent.innerHTML = "";
-        } else {
-            surpriseNumber.textContent = `DÍA ${day}`;
-            surpriseTitle.textContent = surprise.title;
-            surpriseText.textContent = surprise.text;
-
-            showGift(surprise);
-        }
-
-        surpriseModal.classList.remove("hidden");
-    });
-
-    daysGrid.appendChild(button);
-}
-
 
 // VOLVER AL CALENDARIO
 backButton.addEventListener("click", () => {

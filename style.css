@@ -1,695 +1,290 @@
 /* =========================================
 LO QUE ESCONDE DICIEMBRE
-ESTILOS GENERALES
+FUNCIONES GENERALES
 ========================================= */
 
-/* BASE */
+// ELEMENTOS DE LA PÁGINA
 
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
+const enterButton = document.getElementById("enterButton");
+const cover = document.getElementById("cover");
+const calendar = document.getElementById("calendar");
 
-body {
-background: #e9e2d5;
-color: #354438;
-font-family: Georgia, serif;
-}
+const daysGrid = document.getElementById("daysGrid");
 
-.hidden {
-display: none !important;
-}
+const giftScreen = document.getElementById("giftScreen");
+const backButton = document.getElementById("backButton");
+const giftPage = document.getElementById("giftPage");
+
+const surpriseNumber = document.getElementById("surpriseNumber");
+const surpriseTitle = document.getElementById("surpriseTitle");
+const surpriseText = document.getElementById("surpriseText");
+const surpriseContent = document.getElementById("surpriseContent");
+
 
 /* =========================================
-PORTADA
+CONFIGURACIÓN
 ========================================= */
 
-.cover {
-min-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 30px;
-position: relative;
-overflow: hidden;
+// MODO DE PRUEBA
+// Cambiar a false antes del 1 de diciembre.
 
-background: radial-gradient(
-ellipse at center,
-#f5f0e7 0%,
-#e9e2d5 75%,
-#d9cebd 100%
-);
+const PREVIEW_MODE = true;
 
-transition: opacity 0.8s ease;
-}
-
-.cover::before {
-content: "";
-position: absolute;
-inset: 24px;
-border: 1px solid #b5a58d;
-pointer-events: none;
-}
-
-.cover::after {
-content: "";
-position: absolute;
-inset: 31px;
-border: 1px solid rgba(181, 165, 141, 0.35);
-pointer-events: none;
-}
-
-.cover-content {
-position: relative;
-z-index: 1;
-
-display: flex;
-flex-direction: column;
-align-items: center;
-text-align: center;
-
-animation: appear 1.3s ease both;
-transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.cover-label {
-font-size: 10px;
-letter-spacing: 4px;
-color: #927e65;
-margin-bottom: 35px;
-}
-
-.ornament {
-color: #a58a66;
-font-size: 15px;
-letter-spacing: 5px;
-margin-bottom: 25px;
-}
-
-.cover-content h1 {
-max-width: 700px;
-font-size: clamp(45px, 9vw, 82px);
-font-weight: normal;
-line-height: 1.12;
-letter-spacing: -2px;
-}
-
-.cover-subtitle {
-font-size: 14px;
-font-style: italic;
-color: #8c806d;
-margin-top: 22px;
-}
-
-.enter-button {
-margin-top: 48px;
-padding: 15px 28px;
-
-border: 1px solid #9d8d74;
-background: transparent;
-color: #354438;
-
-font-family: Georgia, serif;
-font-size: 13px;
-letter-spacing: 1px;
-
-cursor: pointer;
-transition: all 0.4s ease;
-}
-
-.enter-button span {
-margin-left: 12px;
-}
-
-.enter-button:hover {
-background: #354438;
-color: #f5f0e7;
-transform: translateY(-4px);
-}
-
-.cover-footer {
-margin-top: 55px;
-font-size: 9px;
-letter-spacing: 4px;
-color: #9c8c76;
-}
-
-.cover-decoration {
-position: absolute;
-color: #9b8060;
-animation: float 5s ease-in-out infinite;
-}
-
-.decoration-top {
-top: 12%;
-font-size: 35px;
-}
-
-.decoration-left {
-left: 12%;
-top: 40%;
-font-size: 28px;
-}
-
-.decoration-right {
-right: 12%;
-bottom: 30%;
-font-size: 28px;
-animation-delay: 1s;
-}
-
-.cover.leaving .cover-content {
-opacity: 0;
-transform: translateY(-15px);
-}
-
-.cover.leaving {
-opacity: 0;
-pointer-events: none;
-}
 
 /* =========================================
-CALENDARIO
+REGALOS DE DICIEMBRE
 ========================================= */
 
-.calendar {
-min-height: 100vh;
-padding: 55px 20px 80px;
-text-align: center;
-
-background: radial-gradient(
-ellipse at top,
-#f4eee3 0%,
-#e9e1d4 75%
-);
+const surprises = [
+{
+title: "La bienvenida",
+type: "letter",
+text: "Bienvenido a diciembre. Durante los próximos 24 días vas a encontrar pequeñas sorpresas preparadas especialmente para vos."
+},
+{
+title: "Una canción que me recuerda a vos",
+type: "song",
+text: "Hay canciones que, por alguna razón, terminan teniendo tu nombre."
+},
+{
+title: "¿Cuánto me conocés?",
+type: "quiz",
+text: "Llegó el momento de comprobar cuánto prestás atención."
+},
+{
+title: "Una salida al cine",
+type: "voucher",
+text: "Este vale es por una salida al cine juntos. Vos elegís la película y yo invito."
+},
+{
+title: "Un regalo para todos los días",
+type: "physical",
+text: "Un pequeño regalo para que uses en tu día a día. Espero que te guste."
+},
+{
+title: "Cosas que hacés sin darte cuenta",
+type: "reveal",
+text: "Hay un montón de pequeñas cosas tuyas que me encantan. Hoy te cuento algunas."
+},
+{
+title: "Elegí tu aventura",
+type: "adventure",
+text: "Esta vez vos decidís cómo sigue la historia."
+},
+{
+title: "Una misión para diciembre",
+type: "mission",
+text: "Hoy tenés una misión. No es difícil, pero quiero que la cumplas."
+},
+{
+title: "El museo de nosotros",
+type: "gallery",
+text: "Una pequeña colección de recuerdos, lugares y momentos nuestros."
+},
+{
+title: "Un segundo regalo",
+type: "physical",
+text: "Bueno, este es tu segundo regalo físico de diciembre. Para el próximo vas a tener que pedírselo a Marti..."
+},
+{
+title: "La banda sonora de nosotros",
+type: "playlist",
+text: "Algunas canciones que me hacen acordar a distintos momentos nuestros."
+},
+{
+title: "Una merienda especial",
+type: "invitation",
+text: "Esta vez te invito yo. Te espero para compartir una merienda especial."
 }
+];
 
-.calendar-header {
-max-width: 600px;
-margin: 0 auto 45px;
-}
-
-.eyebrow {
-font-size: 11px;
-letter-spacing: 3px;
-margin-bottom: 18px;
-color: #8a7962;
-}
-
-.calendar-header h2 {
-font-size: clamp(32px, 6vw, 48px);
-font-weight: normal;
-color: #354438;
-margin-bottom: 15px;
-}
-
-.calendar-header > p:last-child {
-color: #817866;
-font-size: 15px;
-}
 
 /* =========================================
-COLLAGE DE LOS 24 DÍAS
+ABRIR EL CALENDARIO
 ========================================= */
 
-.days-grid {
-max-width: 900px;
-margin: auto;
+enterButton.addEventListener("click", () => {
 
-display: grid;
-grid-template-columns: repeat(6, 1fr);
-grid-auto-rows: 105px;
-grid-auto-flow: dense;
-gap: 12px;
-}
+cover.classList.add("leaving");
 
-/* TARJETAS */
+setTimeout(() => {
+cover.classList.add("hidden");
+cover.classList.remove("leaving");
 
-.day {
-position: relative;
-min-width: 0;
-min-height: 0;
-overflow: hidden;
+calendar.classList.remove("hidden");
+}, 800);
 
-display: flex;
-align-items: flex-start;
-justify-content: flex-start;
+});
 
-padding: 13px;
-border: 1px solid #b9ad98;
-border-radius: 2px;
-
-font-family: Georgia, serif;
-font-size: 30px;
-text-align: left;
-
-box-shadow: 2px 4px 9px rgba(53, 68, 56, 0.10);
-
-transition:
-transform 0.3s ease,
-box-shadow 0.3s ease;
-}
-
-/* DISTRIBUCIÓN IRREGULAR */
-
-.day:nth-child(1) {
-grid-column: span 2;
-grid-row: span 2;
-}
-
-.day:nth-child(3),
-.day:nth-child(7),
-.day:nth-child(15),
-.day:nth-child(19) {
-grid-row: span 2;
-}
-
-.day:nth-child(4),
-.day:nth-child(6),
-.day:nth-child(8),
-.day:nth-child(12),
-.day:nth-child(14),
-.day:nth-child(17),
-.day:nth-child(20),
-.day:nth-child(22) {
-grid-column: span 2;
-}
-
-.day:nth-child(10),
-.day:nth-child(24) {
-grid-column: span 2;
-grid-row: span 2;
-}
-
-/* PALETA EQUILIBRADA
-6 COLORES - 4 TARJETAS DE CADA UNO */
-
-.day:nth-child(6n + 1) {
-background: #354438;
-color: #f5f0e7;
-}
-
-.day:nth-child(6n + 2) {
-background: #eee5d7;
-color: #6b3439;
-}
-
-.day:nth-child(6n + 3) {
-background: #d8c8ad;
-color: #354438;
-}
-
-.day:nth-child(6n + 4) {
-background: #6b3439;
-color: #f5f0e7;
-}
-
-.day:nth-child(6n + 5) {
-background: #f5f0e7;
-color: #354438;
-}
-
-.day:nth-child(6n) {
-background: #b5a58d;
-color: #354438;
-}
-
-/* DETALLES DECORATIVOS */
-
-.day::after {
-content: "✳";
-position: absolute;
-right: 13px;
-bottom: 9px;
-font-size: 19px;
-opacity: 0.65;
-}
-
-/* TARJETAS TIPO SOBRE */
-
-.day:nth-child(2)::before,
-.day:nth-child(9)::before,
-.day:nth-child(16)::before,
-.day:nth-child(23)::before {
-content: "";
-position: absolute;
-
-width: 48px;
-height: 48px;
-right: 12px;
-bottom: 12px;
-
-border: 1px solid rgba(107, 52, 57, 0.55);
-transform: rotate(45deg);
-opacity: 0.65;
-}
-
-/* TARJETAS TIPO FOTOGRAFÍA */
-
-.day:nth-child(5)::before,
-.day:nth-child(11)::before,
-.day:nth-child(18)::before {
-content: "";
-position: absolute;
-inset: 15px;
-
-border: 1px solid rgba(53, 68, 56, 0.4);
-transform: rotate(-3deg);
-}
-
-/* DETALLES DE TARJETAS ESPECIALES */
-
-.day:nth-child(1)::after,
-.day:nth-child(10)::after,
-.day:nth-child(24)::after {
-content: "✦";
-font-size: 30px;
-right: 18px;
-bottom: 14px;
-}
-
-/* INTERACCIÓN */
-
-.day:hover:not(:disabled) {
-transform: translateY(-4px) rotate(-1deg);
-box-shadow: 5px 8px 14px rgba(53, 68, 56, 0.17);
-}
-
-.day:disabled {
-opacity: 0.85;
-cursor: not-allowed;
-box-shadow: none;
-}
 
 /* =========================================
-PANTALLAS INDIVIDUALES DE LOS REGALOS
+CONTENIDO DE LOS REGALOS
 ========================================= */
 
-.gift-screen {
-position: fixed;
-inset: 0;
-z-index: 15;
+function showGift(surprise) {
 
-width: 100%;
-min-height: 100vh;
-overflow-y: auto;
+surpriseContent.innerHTML = "";
 
-background: #f5f0e7;
+const placeholders = {
+song: "Acá vamos a poner la canción.",
+quiz: "Acá vamos a crear el cuestionario interactivo.",
+voucher: "VALE POR UNA SALIDA AL CINE",
+physical: "Un regalo preparado especialmente para vos.",
+reveal: "Acá vamos a descubrir las pequeñas cosas, una por una.",
+adventure: "Acá empieza tu aventura.",
+mission: "Tu misión aparecerá acá.",
+gallery: "Acá vamos a armar nuestro museo de recuerdos.",
+playlist: "Acá vamos a reunir nuestra banda sonora.",
+invitation: "Fecha, lugar y menú: próximamente."
+};
+
+const message = placeholders[surprise.type];
+
+if (message) {
+addPlaceholder(message);
 }
 
-/* PANELES DE TRANSICIÓN */
-
-.door-panel {
-position: fixed;
-z-index: 30;
-top: 0;
-bottom: 0;
-width: 50%;
-
-background: #354438;
-will-change: transform;
-
-transition: transform 0.85s cubic-bezier(.77, 0, .18, 1);
 }
 
-.door-panel.left {
-left: 0;
-border-right: 1px solid #a58a66;
+
+// CREAR TEXTOS ADICIONALES
+
+function addPlaceholder(message) {
+
+const paragraph = document.createElement("p");
+
+paragraph.textContent = message;
+paragraph.classList.add("gift-placeholder");
+
+surpriseContent.appendChild(paragraph);
+
 }
 
-.door-panel.right {
-right: 0;
-border-left: 1px solid #a58a66;
-}
-
-.gift-screen.opening .door-panel.left {
-transform: translateX(-100%);
-}
-
-.gift-screen.opening .door-panel.right {
-transform: translateX(100%);
-}
-
-/* ENCABEZADO DE CADA REGALO */
-
-.gift-screen-header {
-position: relative;
-z-index: 2;
-
-display: flex;
-align-items: center;
-justify-content: space-between;
-
-padding: 25px 35px;
-}
-
-.back-button {
-border: 1px solid #b5a58d;
-background: transparent;
-color: #354438;
-
-padding: 11px 17px;
-
-font-family: Georgia, serif;
-font-size: 13px;
-
-cursor: pointer;
-transition: background 0.3s ease;
-}
-
-.back-button:hover {
-background: #e9e2d5;
-}
-
-/* CONTENIDO GENERAL */
-
-.gift-page {
-position: relative;
-z-index: 1;
-
-min-height: calc(100vh - 90px);
-
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-
-padding: 50px 8%;
-text-align: center;
-}
-
-.gift-page h1 {
-max-width: 850px;
-margin-bottom: 25px;
-
-color: #354438;
-font-family: Georgia, serif;
-font-size: clamp(36px, 6vw, 65px);
-font-weight: normal;
-line-height: 1.15;
-}
-
-.gift-page > p {
-max-width: 650px;
-
-color: #665746;
-font-size: 17px;
-line-height: 1.9;
-}
-
-.gift-page .surprise-content {
-width: 100%;
-max-width: 850px;
-margin-top: 35px;
-
-color: #665746;
-font-family: Georgia, serif;
-line-height: 1.8;
-}
-
-.gift-placeholder {
-padding-top: 20px;
-
-border-top: 1px solid rgba(151, 126, 91, 0.4);
-
-font-style: italic;
-font-size: 14px;
-}
-
-/* DÍA 1: CARTA */
-
-.letter-page {
-width: calc(100% - 40px);
-max-width: 680px;
-min-height: 600px;
-
-margin: 15px auto 50px;
-padding: 90px 55px;
-
-border: 1px solid #b5a58d;
-
-background:
-radial-gradient(ellipse at center, #fffaf0, transparent 80%),
-#eee5d7;
-
-box-shadow: 3px 8px 25px rgba(53, 68, 56, 0.10);
-}
-
-.letter-page::before {
-content: "✦ ❧ ✦";
-color: #94734e;
-font-size: 20px;
-letter-spacing: 6px;
-margin-bottom: 35px;
-}
-
-.letter-page h1 {
-font-size: clamp(32px, 5vw, 45px);
-}
-
-.letter-page > p {
-font-size: 16px;
-}
-
-.letter-page .surprise-content {
-max-width: 480px;
-}
 
 /* =========================================
-ANIMACIONES
+FECHA ACTUAL EN URUGUAY
 ========================================= */
 
-@keyframes appear {
-from {
-opacity: 0;
-transform: translateY(20px);
+function getUruguayDate() {
+
+const parts = new Intl.DateTimeFormat("en-US", {
+timeZone: "America/Montevideo",
+year: "numeric",
+month: "numeric",
+day: "numeric"
+}).formatToParts(new Date());
+
+const dateParts = {};
+
+parts.forEach(part => {
+dateParts[part.type] = Number(part.value);
+});
+
+return {
+year: dateParts.year,
+month: dateParts.month,
+day: dateParts.day
+};
+
 }
 
-to {
-opacity: 1;
-transform: translateY(0);
-}
-}
-
-@keyframes float {
-0%, 100% {
-transform: translateY(0);
-}
-
-50% {
-transform: translateY(-9px);
-}
-}
 
 /* =========================================
-ADAPTACIÓN PARA CELULARES
+ABRIR LA PANTALLA DE CADA REGALO
 ========================================= */
 
-@media (max-width: 550px) {
+function openGift(day) {
 
-/* PORTADA */
+const surprise = surprises[day - 1];
 
-.cover-label {
-letter-spacing: 3px;
+surpriseNumber.textContent = `DÍA ${day}`;
+
+if (surprise) {
+
+surpriseTitle.textContent = surprise.title;
+surpriseText.textContent = surprise.text;
+
+showGift(surprise);
+
+giftPage.className = surprise.type === "letter"
+? "gift-page letter-page"
+: "gift-page experience-page";
+
+} else {
+
+surpriseTitle.textContent = "Todavía falta descubrirlo";
+surpriseText.textContent = "Esta sorpresa está esperando su momento.";
+
+surpriseContent.innerHTML = "";
+
+giftPage.className = "gift-page experience-page";
+
 }
 
-.decoration-left {
-left: 8%;
+// Mostrar la pantalla con los paneles cerrados.
+
+giftScreen.classList.remove("hidden");
+giftScreen.classList.remove("opening");
+
+// Forzar al navegador a registrar la posición inicial.
+
+void giftScreen.offsetWidth;
+
+// Esperar un instante antes de abrir los paneles.
+
+setTimeout(() => {
+giftScreen.classList.add("opening");
+}, 60);
+
 }
 
-.decoration-right {
-right: 8%;
+
+/* =========================================
+CREAR LOS 24 DÍAS
+========================================= */
+
+const currentDate = getUruguayDate();
+
+const isDecember =
+currentDate.year === 2026 &&
+currentDate.month === 12;
+
+const currentDay = isDecember ? currentDate.day : 0;
+
+
+for (let day = 1; day <= 24; day++) {
+
+const button = document.createElement("button");
+
+button.classList.add("day");
+button.textContent = String(day).padStart(2, "0");
+
+// Bloquear los días futuros fuera del modo de prueba.
+
+if (!PREVIEW_MODE && (!isDecember || day > currentDay)) {
+button.disabled = true;
 }
 
-/* CALENDARIO */
+// Abrir el regalo correspondiente.
 
-.calendar {
-padding: 45px 13px 60px;
+button.addEventListener("click", () => {
+openGift(day);
+});
+
+// Agregar el botón al calendario.
+
+daysGrid.appendChild(button);
+
 }
 
-.days-grid {
-grid-template-columns: repeat(4, 1fr);
-grid-auto-rows: 82px;
-gap: 8px;
-}
 
-.day {
-padding: 10px;
-font-size: 25px;
-}
+/* =========================================
+VOLVER AL CALENDARIO
+========================================= */
 
-/* DISTRIBUCIÓN EN CELULAR */
+backButton.addEventListener("click", () => {
 
-.day:nth-child(1),
-.day:nth-child(10),
-.day:nth-child(24) {
-grid-column: span 2;
-grid-row: span 2;
-}
+giftScreen.classList.add("hidden");
+giftScreen.classList.remove("opening");
 
-.day:nth-child(3),
-.day:nth-child(7),
-.day:nth-child(15),
-.day:nth-child(19) {
-grid-row: span 2;
-}
-
-.day:nth-child(4),
-.day:nth-child(6),
-.day:nth-child(8),
-.day:nth-child(12),
-.day:nth-child(14),
-.day:nth-child(17),
-.day:nth-child(20),
-.day:nth-child(22) {
-grid-column: span 2;
-}
-
-/* SOBRES */
-
-.day:nth-child(2)::before,
-.day:nth-child(9)::before,
-.day:nth-child(16)::before,
-.day:nth-child(23)::before {
-width: 30px;
-height: 30px;
-}
-
-/* PANTALLAS DE REGALOS */
-
-.gift-screen-header {
-padding: 18px 15px;
-}
-
-.back-button {
-padding: 9px 12px;
-font-size: 12px;
-}
-
-.gift-page {
-min-height: calc(100vh - 75px);
-padding: 35px 22px;
-}
-
-.gift-page h1 {
-font-size: 36px;
-}
-
-.gift-page > p {
-font-size: 15px;
-}
-
-/* CARTA */
-
-.letter-page {
-width: calc(100% - 26px);
-min-height: 520px;
-margin: 10px auto 30px;
-padding: 75px 27px;
-}
-
-.letter-page h1 {
-font-size: 32px;
-}
-}
+});

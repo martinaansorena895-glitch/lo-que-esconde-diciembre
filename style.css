@@ -398,37 +398,611 @@ overflow-y: auto;
 background: #f5f0e7;
 }
 
-/* PANELES DE TRANSICIÓN */
+/* =========================================
+TRANSICIÓN SIN PUERTAS
+========================================= */
 
-.door-panel {
+.gift-screen {
 position: fixed;
-z-index: 30;
-top: 0;
-bottom: 0;
-width: 50%;
+inset: 0;
+z-index: 15;
+width: 100%;
+min-height: 100vh;
+overflow-y: auto;
+background: #f5f0e7;
+opacity: 0;
+}
 
+.gift-screen.gift-visible {
+animation: giftAppear 0.55s ease forwards;
+}
+
+@keyframes giftAppear {
+from {
+opacity: 0;
+transform: translateY(10px);
+}
+
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+
+/* =========================================
+CONTENIDO DE REGALOS
+========================================= */
+
+.letter-content {
+max-width: 500px;
+text-align: left;
+font-size: 16px;
+line-height: 2;
+}
+
+.letter-content p {
+margin-bottom: 20px;
+}
+
+.letter-signature {
+margin-top: 35px;
+font-style: italic;
+text-align: right;
+}
+
+
+/* =========================================
+BOTONES
+========================================= */
+
+.gift-action,
+.music-button {
+display: inline-block;
+margin-top: 25px;
+padding: 13px 24px;
+border: 1px solid #8f806a;
 background: #354438;
-will-change: transform;
-
-transition: transform 0.85s cubic-bezier(.77, 0, .18, 1);
+color: #f5f0e7;
+font-family: Georgia, serif;
+font-size: 13px;
+text-decoration: none;
+cursor: pointer;
+transition: 0.3s ease;
 }
 
-.door-panel.left {
-left: 0;
-border-right: 1px solid #a58a66;
+.gift-action:hover,
+.music-button:hover {
+background: #6b3439;
+transform: translateY(-3px);
 }
 
-.door-panel.right {
-right: 0;
-border-left: 1px solid #a58a66;
+.gift-action:disabled {
+opacity: 0.6;
+cursor: default;
 }
 
-.gift-screen.opening .door-panel.left {
-transform: translateX(-100%);
+
+/* =========================================
+DÍA 2: CANCIÓN
+========================================= */
+
+.song-card {
+max-width: 500px;
+margin: auto;
+padding: 30px;
+background: #e9e2d5;
+border: 1px solid #c3b49d;
 }
 
-.gift-screen.opening .door-panel.right {
-transform: translateX(100%);
+.song-cover {
+width: min(240px, 100%);
+aspect-ratio: 1;
+margin: 0 auto 25px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 12px;
+background: #202020;
+color: white;
+font-family: Arial, sans-serif;
+}
+
+.song-cover span {
+font-size: 65px;
+letter-spacing: 5px;
+}
+
+.song-cover small {
+font-size: 10px;
+letter-spacing: 4px;
+}
+
+.song-label,
+.voucher-label,
+.mission-label,
+.invitation-label,
+.wrapped-label {
+font-size: 10px;
+letter-spacing: 3px;
+color: #927e65;
+}
+
+.song-card h2 {
+font-size: 32px;
+font-weight: normal;
+margin: 12px 0 5px;
+color: #354438;
+}
+
+.song-artist {
+font-size: 13px;
+color: #8a7962;
+}
+
+.song-memory {
+margin-top: 30px;
+padding-top: 25px;
+border-top: 1px solid #c3b49d;
+font-size: 14px;
+line-height: 1.9;
+}
+
+.song-memory p + p {
+margin-top: 15px;
+}
+
+
+/* =========================================
+DÍA 3: QUIZ
+========================================= */
+
+.quiz-area {
+max-width: 550px;
+margin: auto;
+}
+
+.quiz-progress {
+font-size: 10px;
+letter-spacing: 3px;
+color: #927e65;
+margin-bottom: 20px;
+}
+
+.quiz-question {
+font-size: 25px;
+font-weight: normal;
+margin-bottom: 25px;
+color: #354438;
+}
+
+.quiz-answers {
+display: flex;
+flex-direction: column;
+gap: 12px;
+}
+
+.quiz-option,
+.adventure-option {
+padding: 15px;
+border: 1px solid #b5a58d;
+background: transparent;
+color: #354438;
+font-family: Georgia, serif;
+font-size: 14px;
+cursor: pointer;
+transition: 0.3s ease;
+}
+
+.quiz-option:hover,
+.adventure-option:hover {
+background: #e9e2d5;
+}
+
+.quiz-feedback {
+margin-top: 20px;
+font-style: italic;
+}
+
+.quiz-final {
+margin-top: 20px;
+font-style: italic;
+}
+
+
+/* =========================================
+DÍA 4: VALE
+========================================= */
+
+.voucher-card {
+max-width: 480px;
+margin: auto;
+padding: 45px 25px;
+border: 1px dashed #94734e;
+background: #eee5d7;
+}
+
+.voucher-symbol {
+margin: 25px;
+font-size: 35px;
+color: #94734e;
+}
+
+.voucher-card h2 {
+font-size: 13px;
+letter-spacing: 4px;
+font-weight: normal;
+}
+
+.voucher-card h3 {
+font-size: 32px;
+font-weight: normal;
+margin: 15px 0;
+}
+
+.voucher-footer {
+margin-top: 35px;
+padding-top: 20px;
+border-top: 1px solid #b5a58d;
+font-size: 10px;
+letter-spacing: 2px;
+}
+
+
+/* =========================================
+DÍAS 5 Y 10: REGALOS FÍSICOS
+========================================= */
+
+.physical-card {
+max-width: 480px;
+margin: auto;
+padding: 40px 25px;
+border: 1px solid #b5a58d;
+background: #eee5d7;
+}
+
+.physical-icon {
+display: block;
+font-size: 35px;
+margin-bottom: 20px;
+color: #94734e;
+}
+
+.physical-card > p:first-of-type {
+font-size: 10px;
+letter-spacing: 3px;
+color: #927e65;
+}
+
+.physical-card h2 {
+font-size: 32px;
+font-weight: normal;
+margin: 18px 0;
+}
+
+.physical-card small {
+display: block;
+margin-top: 25px;
+font-style: italic;
+}
+
+
+/* =========================================
+DÍA 6: RECUERDOS
+========================================= */
+
+.reveal-area {
+max-width: 500px;
+margin: auto;
+}
+
+.reveal-card {
+min-height: 190px;
+padding: 40px 25px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background: #eee5d7;
+border: 1px solid #b5a58d;
+}
+
+.reveal-number {
+font-size: 10px;
+letter-spacing: 3px;
+color: #927e65;
+}
+
+.reveal-text {
+margin-top: 20px;
+font-size: 18px;
+line-height: 1.8;
+font-style: italic;
+}
+
+
+/* =========================================
+DÍA 7: AVENTURA
+========================================= */
+
+.adventure-area {
+max-width: 550px;
+margin: auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 15px;
+}
+
+.adventure-label {
+font-size: 10px;
+letter-spacing: 3px;
+color: #927e65;
+}
+
+.adventure-area h2 {
+font-size: 28px;
+font-weight: normal;
+}
+
+.adventure-option {
+width: 100%;
+}
+
+.adventure-result {
+margin-top: 20px;
+font-style: italic;
+line-height: 1.9;
+}
+
+
+/* =========================================
+DÍA 8: MISIÓN
+========================================= */
+
+.mission-card {
+max-width: 500px;
+margin: auto;
+padding: 40px 25px;
+border: 1px solid #b5a58d;
+background: #e9e2d5;
+}
+
+.mission-symbol {
+display: block;
+font-size: 38px;
+margin: 20px;
+color: #94734e;
+}
+
+.mission-card h2 {
+font-size: 32px;
+font-weight: normal;
+margin-bottom: 20px;
+}
+
+.mission-card small {
+display: block;
+margin-top: 25px;
+font-style: italic;
+}
+
+
+/* =========================================
+DÍA 9: MUSEO
+========================================= */
+
+.memory-gallery {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 15px;
+}
+
+.memory-item {
+padding: 12px;
+background: #eee5d7;
+border: 1px solid #c3b49d;
+}
+
+.memory-photo {
+aspect-ratio: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+background: #d8c8ad;
+color: #6b3439;
+font-size: 30px;
+}
+
+.memory-item h3 {
+margin: 15px 0 8px;
+font-size: 17px;
+font-weight: normal;
+}
+
+.memory-item p {
+font-size: 12px;
+line-height: 1.6;
+}
+
+.gallery-note {
+margin-top: 25px;
+font-style: italic;
+}
+
+
+/* =========================================
+DÍA 11: SOUNDTRACK
+========================================= */
+
+.wrapped-card {
+max-width: 650px;
+margin: auto;
+padding: 35px 25px;
+background: #354438;
+color: #f5f0e7;
+text-align: left;
+}
+
+.wrapped-label {
+color: #d8c8ad;
+}
+
+.wrapped-card h2 {
+margin-top: 15px;
+font-size: clamp(35px, 7vw, 55px);
+font-weight: normal;
+letter-spacing: -2px;
+}
+
+.wrapped-subtitle {
+color: #d8c8ad;
+font-style: italic;
+}
+
+.wrapped-decoration {
+margin: 25px 0;
+font-size: 30px;
+color: #d8c8ad;
+}
+
+.track-list {
+display: flex;
+flex-direction: column;
+}
+
+.track {
+display: flex;
+align-items: center;
+gap: 15px;
+padding: 18px 0;
+border-top: 1px solid rgba(245, 240, 231, 0.25);
+}
+
+.track-number {
+font-size: 13px;
+color: #d8c8ad;
+}
+
+.album-art {
+width: 72px;
+height: 72px;
+flex-shrink: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+background: #eee5d7;
+color: #354438;
+font-size: 12px;
+letter-spacing: 2px;
+}
+
+.track-info h3 {
+font-size: 16px;
+font-weight: normal;
+}
+
+.track-info p {
+font-size: 12px;
+color: #d8c8ad;
+}
+
+.track-info small {
+display: block;
+margin-top: 4px;
+font-size: 10px;
+color: #b5a58d;
+}
+
+.track-info .track-note {
+margin-top: 8px;
+font-style: italic;
+}
+
+.wrapped-footer {
+margin-top: 25px;
+text-align: center;
+font-size: 12px;
+font-style: italic;
+color: #d8c8ad;
+}
+
+
+/* =========================================
+DÍA 12: INVITACIÓN
+========================================= */
+
+.invitation-card {
+max-width: 480px;
+margin: auto;
+padding: 45px 25px;
+border: 1px solid #b5a58d;
+background: #eee5d7;
+}
+
+.invitation-symbol {
+display: block;
+margin: 25px;
+font-size: 40px;
+}
+
+.invitation-card h2 {
+font-size: 32px;
+font-weight: normal;
+margin-bottom: 20px;
+}
+
+.invitation-footer {
+margin-top: 35px;
+padding-top: 20px;
+border-top: 1px solid #b5a58d;
+font-size: 10px;
+letter-spacing: 3px;
+}
+
+
+/* =========================================
+RESPONSIVE
+========================================= */
+
+@media (max-width: 550px) {
+
+.memory-gallery {
+grid-template-columns: 1fr;
+}
+
+.memory-item {
+max-width: 100%;
+}
+
+.wrapped-card {
+padding: 25px 16px;
+}
+
+.track {
+gap: 10px;
+}
+
+.album-art {
+width: 60px;
+height: 60px;
+}
+
+.track-info h3 {
+font-size: 14px;
+}
+
+.song-card {
+padding: 20px;
+}
+
+.voucher-card,
+.physical-card,
+.mission-card,
+.invitation-card {
+padding: 30px 20px;
+}
 }
 
 /* ENCABEZADO DE CADA REGALO */

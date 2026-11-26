@@ -1,53 +1,47 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lo que esconde diciembre</title>
-    <link rel="stylesheet" href="style.css?v=4">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lo que esconde diciembre</title>
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 
 <body>
 
-    <!-- PORTADA -->
-    <main id="cover" class="cover">
+<!-- PORTADA -->
+<main id="cover" class="cover">
+<div class="cover-decoration decoration-top">✳</div>
+<div class="cover-decoration decoration-left">✧</div>
+<div class="cover-decoration decoration-right">✧</div>
 
-        <div class="cover-decoration decoration-top">✳</div>
-        <div class="cover-decoration decoration-left">✧</div>
-        <div class="cover-decoration decoration-right">✧</div>
+<div class="cover-content">
+<p class="cover-label">A LITTLE SOMETHING FOR YOU</p>
+<div class="ornament">✦ ───── ✦</div>
+<h1>Lo que esconde diciembre</h1>
+<p class="cover-subtitle">Te amo</p>
 
-        <div class="cover-content">
-            <p class="cover-label">A LITTLE SOMETHING FOR YOU</p>
-            <div class="ornament">✦ ───── ✦</div>
-            <h1>Lo que esconde diciembre</h1>
-            <p class="cover-subtitle">Te amo</p>
+<button id="enterButton" class="enter-button">
+Tocar para descubrir
+<span>↗</span>
+</button>
 
-            <button id="enterButton" class="enter-button">
-                Tocar para descubrir
-                <span>↗</span>
-            </button>
+<p class="cover-footer">DICIEMBRE · 2026</p>
+</div>
+</main>
 
-            <p class="cover-footer">DICIEMBRE · 2026</p>
-        </div>
+<!-- CALENDARIO -->
+<section id="calendar" class="calendar hidden">
+<header class="calendar-header">
+<p class="eyebrow">DICIEMBRE · 2026</p>
+<h2>24 días, 24 sorpresas.</h2>
+<p>Hay cosas que merecen ser descubiertas de a poco.</p>
+</header>
 
-    </main>
+<div id="daysGrid" class="days-grid"></div>
+</section>
 
-    <!-- CALENDARIO -->
-    <section id="calendar" class="calendar hidden">
-
-        <header class="calendar-header">
-            <p class="eyebrow">DICIEMBRE · 2026</p>
-            <h2>24 días, 24 sorpresas.</h2>
-            <p>Hay cosas que merecen ser descubiertas de a poco.</p>
-        </header>
-
-        <div id="daysGrid" class="days-grid"></div>
-
-    </section>
-
- <!-- PANTALLA INDIVIDUAL DE CADA REGALO -->
+<!-- PANTALLA INDIVIDUAL DE CADA REGALO -->
 <section id="giftScreen" class="gift-screen hidden">
 
 <div class="door-panel left"></div>
@@ -57,6 +51,7 @@
 <button id="backButton" class="back-button">
 ← Volver a diciembre
 </button>
+
 <p id="surpriseNumber" class="eyebrow"></p>
 </header>
 
@@ -68,7 +63,7 @@
 
 </section>
 
-    <script src="script.js?v=2"></script>
+<script src="script.js?v=3"></script>
 
 </body>
 </html>

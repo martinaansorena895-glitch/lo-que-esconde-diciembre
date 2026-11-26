@@ -88,10 +88,10 @@ margin-bottom: 25px;
 }
 
 .cover-content h1 {
+max-width: 700px;
 font-size: clamp(45px, 9vw, 82px);
 font-weight: normal;
 line-height: 1.12;
-max-width: 700px;
 letter-spacing: -2px;
 }
 
@@ -276,11 +276,7 @@ grid-row: span 2;
 grid-column: span 2;
 }
 
-.day:nth-child(10) {
-grid-column: span 2;
-grid-row: span 2;
-}
-
+.day:nth-child(10),
 .day:nth-child(24) {
 grid-column: span 2;
 grid-row: span 2;
@@ -387,127 +383,125 @@ box-shadow: none;
 }
 
 /* =========================================
-CARTA VINTAGE - REGALOS
+PANTALLAS INDIVIDUALES DE LOS REGALOS
 ========================================= */
 
-.modal {
+.gift-screen {
 position: fixed;
 inset: 0;
-z-index: 10;
+z-index: 15;
+
+width: 100%;
+min-height: 100vh;
+overflow-y: auto;
+
+background: #f5f0e7;
+}
+
+/* PANELES DE TRANSICIÓN */
+
+.door-panel {
+position: fixed;
+z-index: 30;
+top: 0;
+bottom: 0;
+width: 50%;
+
+background: #354438;
+will-change: transform;
+
+transition: transform 0.85s cubic-bezier(.77, 0, .18, 1);
+}
+
+.door-panel.left {
+left: 0;
+border-right: 1px solid #a58a66;
+}
+
+.door-panel.right {
+right: 0;
+border-left: 1px solid #a58a66;
+}
+
+.gift-screen.opening .door-panel.left {
+transform: translateX(-100%);
+}
+
+.gift-screen.opening .door-panel.right {
+transform: translateX(100%);
+}
+
+/* ENCABEZADO DE CADA REGALO */
+
+.gift-screen-header {
+position: relative;
+z-index: 2;
 
 display: flex;
 align-items: center;
-justify-content: center;
+justify-content: space-between;
 
-padding: 18px;
-overflow-y: auto;
-
-background: rgba(38, 43, 35, 0.78);
-backdrop-filter: blur(4px);
+padding: 25px 35px;
 }
 
-.modal-content {
+.back-button {
+border: 1px solid #b5a58d;
+background: transparent;
+color: #354438;
+
+padding: 11px 17px;
+
+font-family: Georgia, serif;
+font-size: 13px;
+
+cursor: pointer;
+transition: background 0.3s ease;
+}
+
+.back-button:hover {
+background: #e9e2d5;
+}
+
+/* CONTENIDO GENERAL */
+
+.gift-page {
 position: relative;
+z-index: 1;
 
-width: 100%;
-max-width: 430px;
-
-min-height: min(680px, calc(100dvh - 36px));
-max-height: calc(100dvh - 36px);
-overflow-y: auto;
+min-height: calc(100vh - 90px);
 
 display: flex;
 flex-direction: column;
 align-items: center;
+justify-content: center;
 
-padding: 75px 38px 55px;
-
-background:
-radial-gradient(
-ellipse at 50% 45%,
-rgba(255, 252, 241, 0.7),
-transparent 75%
-),
-linear-gradient(
-135deg,
-#f5eedf,
-#e9ddc8 55%,
-#f3ead9
-);
-
-border: 1px solid #a99170;
-
-box-shadow:
-0 15px 45px rgba(0, 0, 0, 0.25),
-inset 0 0 35px rgba(151, 126, 91, 0.10);
-
+padding: 50px 8%;
 text-align: center;
-
-animation: letterAppear 0.65s ease both;
 }
 
-/* MARCO INTERIOR */
+.gift-page h1 {
+max-width: 850px;
+margin-bottom: 25px;
 
-.modal-content::before {
-content: "";
-position: absolute;
-inset: 13px;
-
-border: 1px solid rgba(151, 126, 91, 0.65);
-pointer-events: none;
-}
-
-/* ORNAMENTO SUPERIOR */
-
-.modal-content::after {
-content: "✦ ❧ ✦";
-position: absolute;
-top: 29px;
-left: 0;
-
-width: 100%;
-
-color: #94734e;
-font-size: 17px;
-letter-spacing: 5px;
-
-pointer-events: none;
-}
-
-/* NÚMERO DEL DÍA */
-
-.modal-content .eyebrow {
-color: #8b6849;
-font-size: 10px;
-letter-spacing: 4px;
-margin-bottom: 22px;
-}
-
-/* TÍTULO */
-
-.modal-content h2 {
 color: #354438;
 font-family: Georgia, serif;
-font-size: clamp(27px, 7vw, 34px);
+font-size: clamp(36px, 6vw, 65px);
 font-weight: normal;
-line-height: 1.25;
-margin-bottom: 24px;
+line-height: 1.15;
 }
 
-/* TEXTO */
+.gift-page > p {
+max-width: 650px;
 
-.modal-content > p:not(.eyebrow) {
 color: #665746;
-font-family: Georgia, serif;
-font-size: 15px;
+font-size: 17px;
 line-height: 1.9;
 }
 
-/* CONTENIDO DEL REGALO */
-
-.surprise-content {
+.gift-page .surprise-content {
 width: 100%;
-margin-top: 25px;
+max-width: 850px;
+margin-top: 35px;
 
 color: #665746;
 font-family: Georgia, serif;
@@ -523,37 +517,43 @@ font-style: italic;
 font-size: 14px;
 }
 
-/* BOTÓN PARA CERRAR */
+/* DÍA 1: CARTA */
 
-.close-button {
-position: absolute;
-z-index: 2;
-top: 23px;
-right: 25px;
+.letter-page {
+width: calc(100% - 40px);
+max-width: 680px;
+min-height: 600px;
 
-width: 30px;
-height: 30px;
+margin: 15px auto 50px;
+padding: 90px 55px;
 
-border: 1px solid rgba(151, 126, 91, 0.5);
-border-radius: 50%;
+border: 1px solid #b5a58d;
 
-background: transparent;
-color: #735b43;
+background:
+radial-gradient(ellipse at center, #fffaf0, transparent 80%),
+#eee5d7;
 
-font-family: Georgia, serif;
-font-size: 21px;
-line-height: 1;
-
-cursor: pointer;
-
-transition:
-background 0.3s ease,
-transform 0.3s ease;
+box-shadow: 3px 8px 25px rgba(53, 68, 56, 0.10);
 }
 
-.close-button:hover {
-background: rgba(151, 126, 91, 0.15);
-transform: rotate(90deg);
+.letter-page::before {
+content: "✦ ❧ ✦";
+color: #94734e;
+font-size: 20px;
+letter-spacing: 6px;
+margin-bottom: 35px;
+}
+
+.letter-page h1 {
+font-size: clamp(32px, 5vw, 45px);
+}
+
+.letter-page > p {
+font-size: 16px;
+}
+
+.letter-page .surprise-content {
+max-width: 480px;
 }
 
 /* =========================================
@@ -579,18 +579,6 @@ transform: translateY(0);
 
 50% {
 transform: translateY(-9px);
-}
-}
-
-@keyframes letterAppear {
-from {
-opacity: 0;
-transform: translateY(18px) scale(0.97);
-}
-
-to {
-opacity: 1;
-transform: translateY(0) scale(1);
 }
 }
 
@@ -668,210 +656,7 @@ width: 30px;
 height: 30px;
 }
 
-/* CARTA VINTAGE */
-
-.modal {
-padding: 13px;
-}
-
-.modal-content {
-width: 100%;
-max-width: 390px;
-
-min-height: min(620px, calc(100dvh - 26px));
-max-height: calc(100dvh - 26px);
-
-padding: 75px 29px 45px;
-}
-
-.modal-content::before {
-inset: 10px;
-}
-
-.modal-content h2 {
-font-size: 29px;
-}
-
-.modal-content > p:not(.eyebrow) {
-font-size: 14px;
-}
-}
-
-/* =========================================
-PANTALLAS INDIVIDUALES DE LOS REGALOS
-========================================= */
-
-.gift-screen {
-position: fixed;
-inset: 0;
-z-index: 15;
-
-.gift-screen.hidden {
-  display: none !important;
-}
-.gift-screen:not(.hidden) {
-  display:block !important;
-}
-
-width: 100%;
-min-height: 100vh;
-overflow-y: auto;
-
-background: #f5f0e7;
-}
-
-/* PANELES DE TRANSICIÓN */
-
-.door-panel {
-position: fixed;
-z-index: 30;
-top: 0;
-bottom: 0;
-width: 50%;
-
-background: #354438;
-transition: transform 0.85s cubic-bezier(.77, 0, .18, 1);
-}
-
-.door-panel.left {
-left: 0;
-border-right: 1px solid #a58a66;
-}
-
-.door-panel.right {
-right: 0;
-border-left: 1px solid #a58a66;
-}
-
-.gift-screen.opening .door-panel.left {
-transform: translateX(-100%);
-}
-
-.gift-screen.opening .door-panel.right {
-transform: translateX(100%);
-}
-
-.gift-screen.revealed .door-panel {
-  opacity:0;
-  transition: opacity 0.2s ease 0.85s;
-  pointer-events:none;
-}
-
-/* ENCABEZADO */
-
-.gift-screen-header {
-position: relative;
-z-index: 2;
-
-display: flex;
-align-items: center;
-justify-content: space-between;
-
-padding: 25px 35px;
-}
-
-.back-button {
-border: 1px solid #b5a58d;
-background: transparent;
-color: #354438;
-
-padding: 11px 17px;
-
-font-family: Georgia, serif;
-font-size: 13px;
-
-cursor: pointer;
-transition: background 0.3s ease;
-}
-
-.back-button:hover {
-background: #e9e2d5;
-}
-
-/* CONTENIDO GENERAL */
-
-.gift-page {
-position: relative;
-z-index: 1;
-
-min-height: calc(100vh - 90px);
-
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-
-padding: 50px 8%;
-text-align: center;
-}
-
-.gift-page h1 {
-max-width: 850px;
-margin-bottom: 25px;
-
-color: #354438;
-font-family: Georgia, serif;
-font-size: clamp(36px, 6vw, 65px);
-font-weight: normal;
-line-height: 1.15;
-}
-
-.gift-page > p {
-max-width: 650px;
-
-color: #665746;
-font-size: 17px;
-line-height: 1.9;
-}
-
-.gift-page .surprise-content {
-width: 100%;
-max-width: 850px;
-margin-top: 35px;
-}
-
-/* DÍA 1: CARTA */
-
-.letter-page {
-width: calc(100% - 40px);
-max-width: 680px;
-min-height: 600px;
-
-margin: 15px auto 50px;
-padding: 90px 55px;
-
-border: 1px solid #b5a58d;
-
-background:
-radial-gradient(ellipse at center, #fffaf0, transparent 80%),
-#eee5d7;
-
-box-shadow: 3px 8px 25px rgba(53, 68, 56, 0.10);
-}
-
-.letter-page::before {
-content: "✦ ❧ ✦";
-color: #94734e;
-font-size: 20px;
-letter-spacing: 6px;
-margin-bottom: 35px;
-}
-
-.letter-page h1 {
-font-size: clamp(32px, 5vw, 45px);
-}
-
-.letter-page > p {
-font-size: 16px;
-}
-
-.letter-page .surprise-content {
-max-width: 480px;
-}
-
-/* CELULAR */
-
-@media (max-width: 550px) {
+/* PANTALLAS DE REGALOS */
 
 .gift-screen-header {
 padding: 18px 15px;
@@ -894,6 +679,8 @@ font-size: 36px;
 .gift-page > p {
 font-size: 15px;
 }
+
+/* CARTA */
 
 .letter-page {
 width: calc(100% - 26px);

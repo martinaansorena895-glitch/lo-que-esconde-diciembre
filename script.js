@@ -191,13 +191,17 @@ giftPage.className = surprise.type === "letter"
 }
 
 giftScreen.classList.remove("hidden");
-giftScreen.classList.remove("revealed");
+giftScreen.classList.remove("opening", "revealed");
+
+// Forzar al navegador a registrar el estado inicial
+giftScreen.offsetWidth;
+
+// Iniciar la transición
 giftScreen.classList.add("opening");
 
 setTimeout(() => {
 giftScreen.classList.add("revealed");
 }, 900);
-});
 
 daysGrid.appendChild(button);
 }

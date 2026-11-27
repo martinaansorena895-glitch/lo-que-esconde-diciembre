@@ -75,7 +75,7 @@ type: "gallery",
 text: "Una pequeña colección de recuerdos, lugares y momentos nuestros."
 },
 {
-title: "Un segundo regalo",
+title: "Algo para estrenar",
 type: "physical",
 text: "Bueno, este es tu segundo regalo físico de diciembre. Vas a tener que pedirmelo a mi..."
 },
@@ -379,22 +379,9 @@ y te acuerdes de mí.
 <p>
 Vas a tener que pedirmelo a mi :)
 </p>
-<small>iPhone 13 Pro edition</small>
+<small>te amo</small>
 `;
-} else {
-card.innerHTML = `
-<span class="physical-icon">✦</span>
-<p>SECOND PHYSICAL GIFT</p>
-<h2>Un segundo regalo.</h2>
-<p>
-Bueno, este es tu segundo regalo físico
-de diciembre.
-</p>
-<p>
-vas a tener que pedirmelo a mi...
-</p>
-`;
-}
+} 
 
 surpriseContent.appendChild(card);
 }

@@ -733,6 +733,10 @@ case "gallery":
 showGallery();
 break;
 
+case "outfit":
+showOutfit();
+break;
+
 case "playlist":
 showPlaylist();
 break;

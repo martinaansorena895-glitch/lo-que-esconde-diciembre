@@ -215,129 +215,188 @@ DÍA 3: CUESTIONARIO
 
 const quizQuestions = [
 {
-  question: "¿Cuál es una de mis bandas favoritas?",
-  answers: ["Oasis", "Coldplay", "The Killers"],
-  correct: 0
+question: "¿Cuál es una de mis bandas favoritas?",
+options: ["Oasis", "Coldplay", "The Killers"],
+correct: 0
 },
 {
 question: "¿Qué país me gustaría conocer?",
-answers: ["Italia","Inglaterra","Grecia"],
+options: ["Italia", "Inglaterra", "Grecia"],
 correct: 1
 },
 {
 question: "¿Qué es algo que más valore en vos cuando te conocí?",
-answers: ["Lo lindo que sos","Tu inteligencia","Tu sentido del humor"],
+options: ["Lo lindo que sos", "Tu inteligencia", "Tu sentido del humor"],
 correct: 1
 },
 {
-question: "¿Qué comida me hace acordame a nosotros?",
-answers: ["Lemon pie","Brownies","Cookies"],
+question: "¿Qué comida me hace acordar a nosotros?",
+options: ["Lemon pie", "Brownies", "Cookies"],
 correct: 0
 },
 {
-question: "¿Qué lugar me gusta más en mvd",
-answers: ["Punta Carretas","Carrasco","Ciudad Vieja"],
+question: "¿Qué lugar me gusta más en Montevideo?",
+options: ["Punta Carretas", "Carrasco", "Ciudad Vieja"],
 correct: 2
 },
 {
-question: "¿Qué tipo de peliculas ODIO?",
-answers: ["Comedias romanticas","Terror","Misterio"],
+question: "¿Qué tipo de películas ODIO?",
+options: ["Comedias románticas", "Terror", "Misterio"],
 correct: 1
 },
 {
 question: "¿Qué cosa me cuesta más elegir?",
-answers: ["Que ropa ponerme","Que pelicula/serie mirar","Que vamos a almorzar/cenar","Todas las anteriores"],
+options: [
+"Qué ropa ponerme",
+"Qué película o serie mirar",
+"Qué vamos a almorzar o cenar",
+"Todas las anteriores"
+],
 correct: 3
 }
- ];
+];
+
+const openQuizQuestions = [
+"¿Qué suelo hacer cuando estoy muy entusiasmada con algo?",
+"¿Qué es lo más gracioso de mí cuando me enojo?",
+"¿Qué es algo que siempre termino haciendo aunque diga que no lo voy a hacer?"
+];
 
 function showQuiz() {
 let questionIndex = 0;
 let score = 0;
+const writtenAnswers = [];
 
-const area = createElement("div", "quiz-area");
+surpriseTitle.textContent = "¿Cuánto me conocés?";
+surpriseText.textContent =
+"Llegó el momento de comprobar qué tanto me prestás atención.";
 
-const progress = createElement("p", "quiz-progress");
-const question = createElement("h2", "quiz-question");
-const answers = createElement("div", "quiz-answers");
-const feedback = createElement("p", "quiz-feedback");
-
-area.append(progress, question, answers, feedback);
-surpriseContent.appendChild(area);
-
-function renderQuestion() {
-const current = quizQuestions[questionIndex];
-
-progress.textContent =
-`PREGUNTA ${questionIndex + 1} DE ${quizQuestions.length}`;
-
-question.textContent = current.question;
-answers.innerHTML = "";
-feedback.textContent = "";
-
-current.answers.forEach((answer, index) => {
-const button = createButton(
-answer,
-"quiz-option",
-() => {
-const allButtons = answers.querySelectorAll(".quiz-option");
-
-allButtons.forEach((btn, i) => {
-btn.disabled = true;
-
-if (i === current.correct) {
-btn.classList.add("correct-answer");
-} else if (i === index) {
-btn.classList.add("wrong-answer");
-}
-});
-
-if (index === current.correct) {
-score++;
-feedback.textContent = "¡Bien! Esa era.";
-} else {
-feedback.textContent = "Mmm... esa no era.";
+function showMultipleChoice() {
+if (questionIndex >= quizQuestions.length) {
+showOpenQuestions();
+return;
 }
 
-const next = createButton(
-questionIndex === quizQuestions.length - 1
-? "Ver resultado"
-: "Siguiente pregunta →",
-"gift-action",
-() => {
-questionIndex++;
+const question = quizQuestions[questionIndex];
 
-if (questionIndex < quizQuestions.length) {
-renderQuestion();
-} else {
-showResult();
-}
-}
-);
-
-answers.appendChild(next);
-}
-);
-
-answers.appendChild(button);
-});
-}
-
-function showResult() {
-area.innerHTML = `
-<p class="quiz-progress">RESULTADO FINAL</p>
-<h2>${score} de ${quizQuestions.length}</h2>
-<p>
-${score === quizQuestions.length
-? "Bueno, parece que prestás atención."
-: "Todavía te quedan algunas cosas por aprender de mí."}
+surpriseContent.innerHTML = `
+<div class="quiz-question">
+<p class="quiz-progress">
+Pregunta ${questionIndex + 1} de ${quizQuestions.length}
 </p>
-<p class="quiz-final">Igual, te quiero.</p>
+
+<h3>${question.question}</h3>
+
+<div class="quiz-options">
+${question.options.map((option, index) => `
+<button
+type="button"
+class="quiz-option"
+data-index="${index}">
+${option}
+</button>
+`).join("")}
+</div>
+</div>
+`;
+
+surpriseContent.querySelectorAll(".quiz-option").forEach(button => {
+button.addEventListener("click", () => {
+const selectedAnswer = Number(button.dataset.index);
+
+if (selectedAnswer === question.correct) {
+score++;
+}
+
+questionIndex++;
+showMultipleChoice();
+});
+});
+}
+
+function showOpenQuestions() {
+surpriseContent.innerHTML = `
+<div class="quiz-open">
+<p class="quiz-progress">
+Última parte · 3 preguntas
+</p>
+
+<h3>Ahora quiero leer tus respuestas...</h3>
+
+<form id="openQuizForm">
+${openQuizQuestions.map((question, index) => `
+<div class="quiz-open-question">
+<label for="openAnswer${index}">
+${question}
+</label>
+
+<textarea
+id="openAnswer${index}"
+placeholder="Escribí tu respuesta..."
+rows="3"
+required>
+</textarea>
+</div>
+`).join("")}
+
+<button type="submit" class="quiz-option">
+Terminar cuestionario
+</button>
+</form>
+</div>
+`;
+
+document.getElementById("openQuizForm")
+.addEventListener("submit", (event) => {
+event.preventDefault();
+
+openQuizQuestions.forEach((question, index) => {
+writtenAnswers.push({
+question: question,
+answer: document.getElementById(`openAnswer${index}`).value
+});
+});
+
+showQuizResults();
+});
+}
+
+function showQuizResults() {
+surpriseContent.innerHTML = `
+<div class="quiz-results">
+<h3>¡Terminaste!</h3>
+
+<p>
+Acertaste ${score} de ${quizQuestions.length}
+preguntas de opción múltiple.
+</p>
+
+<p>
+Y estas fueron tus respuestas a las últimas tres:
+</p>
+
+<div class="quiz-written-answers">
+${writtenAnswers.map((item, index) => `
+<div class="quiz-answer">
+<p><strong>${item.question}</strong></p>
+<p>${item.answer
+.replace(/&/g, "&amp;")
+.replace(/</g, "&lt;")
+.replace(/>/g, "&gt;")
+.replace(/"/g, "&quot;")
+.replace(/'/g, "&#039;")}</p>
+</div>
+`).join("")}
+</div>
+
+<p>Gracias por jugar. Te quiero.</p>
+</div>
 `;
 }
 
-renderQuestion();
+showMultipleChoice();
 }
+
 
 /* =========================================
 DÍA 4: VALE PARA EL CINE

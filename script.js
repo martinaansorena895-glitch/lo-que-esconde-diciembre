@@ -556,6 +556,31 @@ surpriseContent.append(gallery, note);
 }
 
 /* =========================================
+DÍA 10: ALGO PARA ESTRENAR
+========================================= */
+
+function showOutfit() {
+surpriseTitle.textContent = "Algo para estrenar";
+
+surpriseText.textContent =
+"En este regalo elegí algo para vos. Espero haber acertado con mis elecciones...";
+
+surpriseContent.innerHTML = `
+<div class="outfit-gift">
+<p class="outfit-message">
+Un pequeño regalo para que disfrutes,
+lo uses y te acuerdes de mi.
+</p>
+
+<p class="outfit-signature">
+Con cariño, Marti.
+</p>
+</div>
+`;
+}
+
+
+/* =========================================
 DÍA 11: BANDA SONORA
 ========================================= */
 

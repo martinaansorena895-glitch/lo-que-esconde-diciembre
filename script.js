@@ -217,32 +217,44 @@ const quizQuestions = [
 {
 question: "¿Cuál es una de mis bandas favoritas?",
 options: ["Oasis", "Coldplay", "The Killers"],
-correct: 0
+correct: 0,
+correctMessage: "",
+incorrectMessage: ""
 },
 {
 question: "¿Qué país me gustaría conocer?",
 options: ["Italia", "Inglaterra", "Grecia"],
-correct: 1
+correct: 1,
+correctMessage: "",
+incorrectMessage: ""
 },
 {
 question: "¿Qué es algo que más valore en vos cuando te conocí?",
 options: ["Lo lindo que sos", "Tu inteligencia", "Tu sentido del humor"],
-correct: 1
+correct: 1,
+correctMessage: "",
+incorrectMessage: ""
 },
 {
 question: "¿Qué comida me hace acordar a nosotros?",
 options: ["Lemon pie", "Brownies", "Cookies"],
-correct: 0
+correct: 0,
+correctMessage: "",
+incorrectMessage: ""
 },
 {
 question: "¿Qué lugar me gusta más en Montevideo?",
 options: ["Punta Carretas", "Carrasco", "Ciudad Vieja"],
-correct: 2
+correct: 2,
+correctMessage: "",
+incorrectMessage: ""
 },
 {
 question: "¿Qué tipo de películas ODIO?",
 options: ["Comedias románticas", "Terror", "Misterio"],
-correct: 1
+correct: 1,
+correctMessage: "",
+incorrectMessage: ""
 },
 {
 question: "¿Qué cosa me cuesta más elegir?",
@@ -252,7 +264,9 @@ options: [
 "Qué vamos a almorzar o cenar",
 "Todas las anteriores"
 ],
-correct: 3
+correct: 3,
+correctMessage: "",
+incorrectMessage: ""
 }
 ];
 
@@ -264,6 +278,7 @@ const openQuizQuestions = [
 
 function showQuiz() {
 let questionIndex = 0;
+let openQuestionIndex = 0;
 let score = 0;
 const writtenAnswers = [];
 
@@ -271,9 +286,18 @@ surpriseTitle.textContent = "¿Cuánto me conocés?";
 surpriseText.textContent =
 "Llegó el momento de comprobar qué tanto me prestás atención.";
 
+function escapeQuizHTML(text) {
+return String(text)
+.replace(/&/g, "&amp;")
+.replace(/</g, "&lt;")
+.replace(/>/g, "&gt;")
+.replace(/"/g, "&quot;")
+.replace(/'/g, "&#039;");
+}
+
 function showMultipleChoice() {
 if (questionIndex >= quizQuestions.length) {
-showOpenQuestions();
+showOpenQuestion();
 return;
 }
 
@@ -297,50 +321,104 @@ ${option}
 </button>
 `).join("")}
 </div>
+
+<div id="quizFeedback"></div>
 </div>
 `;
 
-surpriseContent.querySelectorAll(".quiz-option").forEach(button => {
+const optionButtons =
+surpriseContent.querySelectorAll(".quiz-option");
+
+optionButtons.forEach(button => {
 button.addEventListener("click", () => {
 const selectedAnswer = Number(button.dataset.index);
+const isCorrect = selectedAnswer === question.correct;
 
-if (selectedAnswer === question.correct) {
+if (isCorrect) {
 score++;
 }
 
+optionButtons.forEach((optionButton, index) => {
+optionButton.disabled = true;
+
+if (index === question.correct) {
+optionButton.style.backgroundColor = "#354438";
+optionButton.style.color = "#f5f0e7";
+optionButton.style.borderColor = "#354438";
+}
+
+if (index === selectedAnswer && !isCorrect) {
+optionButton.style.backgroundColor = "#6b3439";
+optionButton.style.color = "#f5f0e7";
+optionButton.style.borderColor = "#6b3439";
+}
+});
+
+const feedbackMessage = isCorrect
+? (question.correctMessage || "¡Bien! Esa era la respuesta correcta.")
+: (question.incorrectMessage || "Esta vez no era esa. ¡Seguimos!");
+
+const feedbackColor = isCorrect ? "#354438" : "#6b3439";
+
+document.getElementById("quizFeedback").innerHTML = `
+<div style="
+color: ${feedbackColor};
+text-align: center;
+margin-top: 20px;
+line-height: 1.6;
+">
+<strong>
+${isCorrect ? "¡Correcto!" : "No era esa"}
+</strong>
+<p>${escapeQuizHTML(feedbackMessage)}</p>
+</div>
+
+<button
+type="button"
+class="quiz-option"
+id="nextQuizQuestion">
+Siguiente
+</button>
+`;
+
+document.getElementById("nextQuizQuestion")
+.addEventListener("click", () => {
 questionIndex++;
 showMultipleChoice();
 });
 });
+});
 }
 
-function showOpenQuestions() {
+function showOpenQuestion() {
+if (openQuestionIndex >= openQuizQuestions.length) {
+showQuizResults();
+return;
+}
+
+const question = openQuizQuestions[openQuestionIndex];
+
 surpriseContent.innerHTML = `
 <div class="quiz-open">
 <p class="quiz-progress">
-Última parte · 3 preguntas
+Preguntas abiertas · ${openQuestionIndex + 1} de ${openQuizQuestions.length}
 </p>
 
-<h3>Ahora quiero leer tus respuestas...</h3>
+<h3>${question}</h3>
 
 <form id="openQuizForm">
-${openQuizQuestions.map((question, index) => `
 <div class="quiz-open-question">
-<label for="openAnswer${index}">
-${question}
-</label>
-
 <textarea
-id="openAnswer${index}"
+id="openAnswer"
 placeholder="Escribí tu respuesta..."
-rows="3"
-required>
-</textarea>
+rows="4"
+required></textarea>
 </div>
-`).join("")}
 
 <button type="submit" class="quiz-option">
-Terminar cuestionario
+${openQuestionIndex === openQuizQuestions.length - 1
+? "Terminar cuestionario"
+: "Siguiente pregunta"}
 </button>
 </form>
 </div>
@@ -350,14 +428,15 @@ document.getElementById("openQuizForm")
 .addEventListener("submit", (event) => {
 event.preventDefault();
 
-openQuizQuestions.forEach((question, index) => {
+const answer = document.getElementById("openAnswer").value;
+
 writtenAnswers.push({
 question: question,
-answer: document.getElementById(`openAnswer${index}`).value
-});
+answer: answer
 });
 
-showQuizResults();
+openQuestionIndex++;
+showOpenQuestion();
 });
 }
 
@@ -376,28 +455,21 @@ Y estas fueron tus respuestas a las últimas tres:
 </p>
 
 <div class="quiz-written-answers">
-${writtenAnswers.map((item, index) => `
+${writtenAnswers.map(item => `
 <div class="quiz-answer">
-<p><strong>${item.question}</strong></p>
-<p>${item.answer
-.replace(/&/g, "&amp;")
-.replace(/</g, "&lt;")
-.replace(/>/g, "&gt;")
-.replace(/"/g, "&quot;")
-.replace(/'/g, "&#039;")}</p>
+<p><strong>${escapeQuizHTML(item.question)}</strong></p>
+<p>${escapeQuizHTML(item.answer)}</p>
 </div>
 `).join("")}
 </div>
 
-<p>Gracias por jugar. Te quiero.</p>
+<p>Gracias por jugar. Te amo.</p>
 </div>
 `;
 }
 
 showMultipleChoice();
 }
-
-
 /* =========================================
 DÍA 4: VALE PARA EL CINE
 ========================================= */

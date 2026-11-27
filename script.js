@@ -405,48 +405,28 @@ DÍA 6: PEQUEÑOS DETALLES
 ========================================= */
 
 function showReveal() {
-const details = [
-"Acá va una de esas pequeñas cosas que hacés y me encantan.",
-"Acá va otro detalle que ni te das cuenta de que hacés.",
-"Y algunas cosas que son muy vos."
-];
+surpriseTitle.textContent = "Cosas que hacés sin darte cuenta";
 
-const area = createElement("div", "reveal-area");
+surpriseText.textContent =
+"Hay algunas cosas que hacés sin pensarlo demasiado, y probablemente ni te des cuenta de que las noto.";
 
-const card = createElement("div", "reveal-card");
-const number = createElement("p", "reveal-number", "01 / 03");
-const text = createElement("p", "reveal-text", details[0]);
+surpriseContent.innerHTML = `
+<div class="reveal-list">
+<p>La forma en que me mirás cuando estoy hablando de algo que me entusiasma.</p>
+<p>Cómo te acordás de detalles que te conté hace tiempo.</p>
+<p>La manera en que me explicás cosas que te gustan.</p>
+<p>Cómo cambia tu tono de voz cuando estás cansado.</p>
+<p>La tranquilidad que transmitís cuando estoy preocupada.</p>
+<p>Que cuando estás muy feliz o nervioso empezás a hacer bobadas.</p>
+<p>Que cuando hay un silencio hacés ruidos raros para hacerme reír o para que no sea incómodo.</p>
+<p>Que me decís que soy muy linda cuando estoy enojada.</p>
+</div>
 
-let current = 0;
-
-const button = createButton(
-"Descubrir otra",
-"gift-action",
-() => {
-current++;
-
-if (current >= details.length) {
-card.innerHTML = `
-<p class="reveal-number">FIN</p>
-<p class="reveal-text">
-Podría seguir, pero algunas cosas
-prefiero decírtelas en persona.
+<p class="reveal-ending">
+Y seguramente hay muchas más que todavía no se me ocurrieron.
+Son pequeñas cosas, pero son muy tuyas.
 </p>
 `;
-button.remove();
-return;
-}
-
-number.textContent =
-`${String(current + 1).padStart(2, "0")} / 03`;
-
-text.textContent = details[current];
-}
-);
-
-card.append(number, text);
-area.append(card, button);
-surpriseContent.appendChild(area);
 }
 
 

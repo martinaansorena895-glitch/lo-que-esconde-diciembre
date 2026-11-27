@@ -1267,3 +1267,36 @@ padding: 75px 27px;
 font-size: 32px;
 }
 }
+
+/* RESPUESTAS DEL QUIZ */
+
+.quiz-option.correct-answer {
+background-color: #dce8d5;
+border-color: #718b68;
+color: #344b35;
+}
+
+.quiz-option.wrong-answer {
+background-color: #f1dada;
+border-color: #bd7777;
+color: #773f3f;
+}
+
+.quiz-option:disabled {
+opacity: 1;
+cursor: default;
+}
+
+/* FOTOGRAFÍAS DEL MUSEO */
+
+.memory-photo {
+overflow: hidden;
+}
+
+.memory-photo img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+border-radius: inherit;
+}

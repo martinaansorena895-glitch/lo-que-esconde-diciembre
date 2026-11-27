@@ -280,7 +280,7 @@ const button = createButton(
 answer,
 "quiz-option",
 () => {
-const allButtons = answers.querySelectorAll("button");
+const allButtons = answers.querySelectorAll(".quiz-option");
 
 allButtons.forEach((btn, i) => {
 btn.disabled = true;
@@ -321,29 +321,6 @@ answers.appendChild(next);
 
 answers.appendChild(button);
 });
-
-const next = createButton(
-questionIndex === quizQuestions.length - 1
-? "Ver resultado"
-: "Siguiente pregunta →",
-"gift-action",
-() => {
-questionIndex++;
-
-if (questionIndex < quizQuestions.length) {
-renderQuestion();
-} else {
-showResult();
-}
-}
-);
-
-answers.appendChild(next);
-}
-);
-
-answers.appendChild(button);
-});
 }
 
 function showResult() {
@@ -361,7 +338,6 @@ ${score === quizQuestions.length
 
 renderQuestion();
 }
-
 
 /* =========================================
 DÍA 4: VALE PARA EL CINE
